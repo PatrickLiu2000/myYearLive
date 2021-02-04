@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "118502184356",
+    "project_id": "myyearlive",
+    "storage_bucket": "myyearlive.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:118502184356:android:04e6f48b7c42d34984dd31",
+        "android_client_info": {
+          "package_name": "com.myyearlive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "118502184356-0j38lkdstkbiqvq0d2hlpfcn9dj9fsbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD86ILrerc4lWZ832wT-5Nnhiy2bpeuRyw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "118502184356-0j38lkdstkbiqvq0d2hlpfcn9dj9fsbl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "118502184356-9f77sk2aa8d4fcfdgcg0kt29gmseete3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.myyearlive"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
