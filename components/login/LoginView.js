@@ -159,16 +159,7 @@ export default function LoginView() {
             </TouchableOpacity>
 
 
-            {/*FORGOT PASS*/}
-            <TouchableOpacity>
-                <Text style={styles.forgot_button}>Forgot Password?</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-                title="Google Sign-In"
-                onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-                style={styles.login_button}>
-                    <Text style={styles.loginText}>Google Log In</Text> 
-            </TouchableOpacity>
+            
 
 
             
@@ -178,8 +169,10 @@ export default function LoginView() {
                     navigation.navigate('RegisterScreen')
                     }
                 style={styles.login_button}>
-                    <Text style={styles.loginText}>Don't have an account? Register here</Text> 
+                    <Text style={styles.loginText}>Sign Up</Text> 
             </TouchableOpacity>
+            <Text style={styles.remember}>Don't have an account?</Text> 
+
             
         </View>   
         </View>   

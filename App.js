@@ -18,31 +18,28 @@ export default function App() {
         <Stack.Screen
             name='LoginView'
             component={LoginView}
+            options={{ 
+              title: 'Login',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, }}
           />
         <Stack.Screen
           name='RegisterScreen'
-          component={RegisterScreen}
+            component={RegisterScreen}
+            options={{ 
+              title: 'Register',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, 
+            }}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const containerStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#bbdfc8',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-});
 
-const childStyle = StyleSheet.create({
-  container: {
-    margin: 30,
-    // alignItems: 'flex-start',
-  }
-})
 
 const styles = StyleSheet.create({
   container: {
