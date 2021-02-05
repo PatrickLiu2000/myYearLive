@@ -15,7 +15,6 @@ import {
     Alert} from 'react-native';
     
 async function onEmailSignInButton(email, password) {
-    console.log(email, password)
     auth()
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
