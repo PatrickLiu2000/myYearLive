@@ -1,4 +1,5 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import auth from '@react-native-firebase/auth';
 import { 
     Platform,
     Button, 
@@ -10,7 +11,26 @@ import {
     CheckBox,
     Switch,
     Alert} from 'react-native';
-
+    
+async function onEmailSignInButton(email, password) {
+    console.log(email, password)
+    auth()
+    .createUserWithEmailAndPassword(email, password)
+    .then(() => {
+        console.log('User account created & signed in!');
+    })
+    .catch(error => {
+        if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+        }
+    
+        if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+        }
+    
+        console.error(error);
+    });
+}
 
 export default function LoginView() {
 
@@ -44,6 +64,22 @@ export default function LoginView() {
         setRemember(!remember);
     }
 
+
+    const [initializing, setInitializing] = useState(true);
+    const [user, setUser] = useState();
+
+    // Handle user state changes
+    function onAuthStateChanged(user) {
+        setUser(user);
+        if (initializing) setInitializing(false);
+    }
+
+    useEffect(() => {
+        const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+        return subscriber; // unsubscribe on unmount
+    }, []);
+
+    if (initializing) return null;
 
     return (
     <View> 
@@ -86,14 +122,17 @@ export default function LoginView() {
 
 
         {/*LOGIN BUTTON*/}
-        <TouchableOpacity style={styles.login_button}>
-            <Text style={styles.loginText}>LOG IN</Text>
-           
+        <TouchableOpacity
+            style={styles.login_button}
+            onPress={() => onEmailSignInButton(email, password).then(() => console.log('Signing in...'))}
+            >
+                <Text style={styles.loginText}>Log In</Text>
         </TouchableOpacity>
 
 
         {/*FORGOT PASS*/}
         <TouchableOpacity>
+            <Text>Login</Text>
             <Text style={styles.forgot_button}>Forgot Password?</Text>
         </TouchableOpacity>
         

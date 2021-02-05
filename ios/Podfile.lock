@@ -634,8 +634,8 @@ PODS:
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
-  - RNReanimated (1.13.1):
-    - React
+  - RNReanimated (1.13.2):
+    - React-Core
   - RNScreens (2.14.0):
     - React-Core
   - RNVectorIcons (7.1.0):
@@ -872,7 +872,7 @@ SPEC CHECKSUMS:
   RNFBFirestore: b596de5f7cb73ec799cf0eb24db5be69540be25f
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
-  RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476
+  RNReanimated: e03f7425cb7a38dcf1b644d680d1bfc91c3337ad
   RNScreens: 2e278a90eb15092ed261d4f2271e3fc9b60d08d4
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
@@ -880,4 +880,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: e4990fc21d0fc654b6b077142979442ec8216ec6
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1
