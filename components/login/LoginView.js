@@ -99,7 +99,7 @@ export default function LoginView() {
 
     return (
     <View> 
-        
+        <LoginValidation/>
         {/* FILL IN EMAIL  */}
         <View style={styles.footer}>
             <Text style={styles.text_footer}>Email</Text>
@@ -160,6 +160,39 @@ export default function LoginView() {
     </View>   
     )
 };
+
+function LoginValidation() {
+    // Set an initializing state whilst Firebase connects
+    const [initializing, setInitializing] = useState(true);
+    const [user, setUser] = useState();
+  
+    // Handle user state changes
+    function onAuthStateChanged(user) {
+      setUser(user);
+      if (initializing) setInitializing(false);
+    }
+  
+    useEffect(() => {
+      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+      return subscriber; // unsubscribe on unmount
+    }, []);
+  
+    if (initializing) return null;
+  
+    if (!user) {
+      return (
+        <View>
+          <Text style={styles.remember}>Login</Text>
+        </View>
+      );
+    }
+  
+    return (
+      <View>
+        <Text style={styles.remember}>Welcome {user.email}</Text>
+      </View>
+    );
+  }
   
 
   const styles = StyleSheet.create({
@@ -186,8 +219,8 @@ export default function LoginView() {
       remember:{
           padding: 5,
           fontWeight: "bold",
-          color: "#008891"
-
+          color: "#008891",
+          marginLeft: 30
       },
 
       login_button: {
@@ -206,7 +239,6 @@ export default function LoginView() {
           fontWeight: "bold",
           fontSize: 18,
           color: "#fff",
-
       },
 
       forgot_button: {
