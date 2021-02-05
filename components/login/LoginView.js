@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-community/google-signin';
+import { useNavigation } from '@react-navigation/native';
 import { 
     Platform,
     Button, 
@@ -32,6 +33,14 @@ async function onEmailSignInButton(email, password) {
         console.error(error);
     });
 }
+
+async function signOut() {
+    auth()
+        .signOut()
+        .then(() => console.log('User signed out!'));
+}
+
+
 
 
 GoogleSignin.configure({
@@ -95,105 +104,116 @@ export default function LoginView() {
         return subscriber; // unsubscribe on unmount
     }, []);
 
+    //Navigation
+    const navigation = useNavigation();
+
     if (initializing) return null;
+
+    if (!user) {
+        return (
+        <View style={containerStyle.container}> 
+            <View style={childStyle.container}> 
+            {/* FILL IN EMAIL  */}
+            <View style={styles.footer}>
+                <Text style={styles.text_footer}>Email</Text>
+            </View>
+
+            <View>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Your Email"
+                autoCapitalize = "none"
+                // placeholderTextColor="#003F5C"
+                onChangeText={(email) => setEmail(email)}
+                />
+            </View>
+
+            {/*PASSWORD*/}
+            <View style={[styles.footer, {marginTop: 35}]}>
+                <Text style={styles.text_footer}>Password</Text>
+            </View>
+
+            <View>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Your Password"
+                secureTextEntry={true}
+                onChangeText={(password) => setPassword(password)}
+                />
+            </View>
+
+        {/*REMEMBER CHECKBOX*/}
+        
+            <View style={{flexDirection: 'row', padding: 35, paddingLeft: 0}}>
+                { Platform.OS === 'ios' ? <Switch value={remember} onValueChange={() => onRememberMe(remember)}/> : <CheckBox value={remember} onValueChange={() => onRememberMe(remember)}/> }
+                <Text style={styles.remember}> Remember Me</Text>
+            </View>
+
+
+            {/*LOGIN BUTTON*/}
+            <TouchableOpacity
+                style={styles.login_button}
+                onPress={() => onEmailSignInButton(email, password).then(() => console.log('Signing in...'))}
+                >
+                    <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+
+
+            {/*FORGOT PASS*/}
+            <TouchableOpacity>
+                <Text style={styles.forgot_button}>Forgot Password?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+                title="Google Sign-In"
+                onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+                style={styles.login_button}>
+                    <Text style={styles.loginText}>Google Log In</Text> 
+            </TouchableOpacity>
+
+
+            
+            <TouchableOpacity
+                title="Register"
+                onPress={() =>
+                    navigation.navigate('RegisterScreen')
+                    }
+                style={styles.login_button}>
+                    <Text style={styles.loginText}>Don't have an account? Register here</Text> 
+            </TouchableOpacity>
+            
+        </View>   
+        </View>   
+        )
+    }
 
     return (
-    <View> 
-        <LoginValidation/>
-        {/* FILL IN EMAIL  */}
-        <View style={styles.footer}>
-            <Text style={styles.text_footer}>Email</Text>
-        </View>
-
-        <View>
-            <TextInput
-            style={styles.TextInput}
-            placeholder="Your Email"
-            autoCapitalize = "none"
-            // placeholderTextColor="#003F5C"
-            onChangeText={(email) => setEmail(email)}
-            />
-        </View>
-
-         {/*PASSWORD*/}
-        <View style={[styles.footer, {marginTop: 35}]}>
-            <Text style={styles.text_footer}>Password</Text>
-        </View>
-
-        <View>
-            <TextInput
-            style={styles.TextInput}
-            placeholder="Your Password"
-            secureTextEntry={true}
-            onChangeText={(password) => setPassword(password)}
-            />
-        </View>
-
-       {/*REMEMBER CHECKBOX*/}
-    
-        <View style={{flexDirection: 'row', padding: 35, paddingLeft: 0}}>
-            { Platform.OS === 'ios' ? <Switch value={remember} onValueChange={() => onRememberMe(remember)}/> : <CheckBox value={remember} onValueChange={() => onRememberMe(remember)}/> }
-            <Text style={styles.remember}> Remember Me</Text>
-        </View>
-
-
-        {/*LOGIN BUTTON*/}
-        <TouchableOpacity
-            style={styles.login_button}
-            onPress={() => onEmailSignInButton(email, password).then(() => console.log('Signing in...'))}
-            >
-                <Text style={styles.loginText}>Log In</Text>
-        </TouchableOpacity>
-
-
-        {/*FORGOT PASS*/}
-        <TouchableOpacity>
-            <Text style={styles.forgot_button}>Forgot Password?</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-        title="Google Sign-In"
-        onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-        style={styles.login_button}>
-            <Text style={styles.loginText}>Google Log In</Text> 
-        </TouchableOpacity>
-
-    </View>   
-    )
-};
-
-function LoginValidation() {
-    // Set an initializing state whilst Firebase connects
-    const [initializing, setInitializing] = useState(true);
-    const [user, setUser] = useState();
-  
-    // Handle user state changes
-    function onAuthStateChanged(user) {
-      setUser(user);
-      if (initializing) setInitializing(false);
-    }
-  
-    useEffect(() => {
-      const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
-      return subscriber; // unsubscribe on unmount
-    }, []);
-  
-    if (initializing) return null;
-  
-    if (!user) {
-      return (
-        <View>
-          <Text style={styles.remember}>Login</Text>
+        <View style={containerStyle.container}>
+          <Text style={styles.remember}>Welcome {user.email}</Text>
+          <TouchableOpacity
+                title="Sign Out"
+                onPress={() => signOut().then(() => console.log('Signing out'))}
+                style={styles.login_button}>
+                    <Text style={styles.loginText}>Sign Out</Text> 
+            </TouchableOpacity>
         </View>
       );
+};
+
+const containerStyle = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#bbdfc8',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
+  });
+  
+  const childStyle = StyleSheet.create({
+    container: {
+      margin: 30,
+      // alignItems: 'flex-start',
     }
-  
-    return (
-      <View>
-        <Text style={styles.remember}>Welcome {user.email}</Text>
-      </View>
-    );
-  }
-  
+  })
 
   const styles = StyleSheet.create({
       container: {

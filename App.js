@@ -1,14 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import LoginView from './components/login/LoginView';
+import RegisterScreen from './components/register/RegisterScreen';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+
 
 export default function App() {
   return (
-    <View style={containerStyle.container}>
-      <View style={childStyle.container}>
-      <LoginView/>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+            name='LoginView'
+            component={LoginView}
+          />
+        <Stack.Screen
+          name='RegisterScreen'
+          component={RegisterScreen}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
