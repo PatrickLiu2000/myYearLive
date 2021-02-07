@@ -22,11 +22,11 @@ async function onEmailSignInButton(email, password) {
     })
     .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
+            console.log('That email address is already in use!');
         }
     
         if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
+            console.log('That email address is invalid!');
         }
     
         console.error(error);
@@ -38,7 +38,6 @@ async function signOut() {
         .signOut()
         .then(() => console.log('User signed out!'));
 }
-
 
 
 
@@ -56,7 +55,7 @@ async function onGoogleButtonPress() {
     return auth().signInWithCredential(googleCredential);
 }
 
-export default function LoginView() {
+export default function RegisterScreen() {
 
     //TESTING if email/password is invalid 
     const [data, setData] = React.useState({
@@ -112,6 +111,21 @@ export default function LoginView() {
         return (
         <View style={containerStyle.container}> 
             <View style={childStyle.container}> 
+
+            {/* FILL IN NAME  */}
+            <View style={styles.footer}>
+                <Text style={styles.text_footer}>Full Name</Text>
+            </View>
+            <View>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Your Name"
+                autoCapitalize = "none"
+                // placeholderTextColor="#003F5C"
+                />
+            </View>
+
+            
             {/* FILL IN EMAIL  */}
             <View style={styles.footer}>
                 <Text style={styles.text_footer}>Email</Text>
@@ -141,7 +155,7 @@ export default function LoginView() {
                 />
             </View>
 
-        {/*REMEMBER CHECKBOX*/}
+            {/*REMEMBER CHECKBOX*/}
         
             <View style={{flexDirection: 'row', padding: 35, paddingLeft: 0}}>
                 { Platform.OS === 'ios' ? <Switch value={remember} onValueChange={() => onRememberMe(remember)}/> : <CheckBox value={remember} onValueChange={() => onRememberMe(remember)}/> }
@@ -154,24 +168,21 @@ export default function LoginView() {
                 style={styles.login_button}
                 onPress={() => onEmailSignInButton(email, password).then(() => console.log('Signing in...'))}
                 >
-                    <Text style={styles.loginText}>Log In</Text>
+                    <Text style={styles.loginText}>Create account</Text>
             </TouchableOpacity>
 
-
-            
-
-
-            
             <TouchableOpacity
-                title="Register"
-                onPress={() =>
-                    navigation.navigate('RegisterScreen')
-                    }
+                title="Google Sign-In"
+                onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
                 style={styles.login_button}>
-                    <Text style={styles.loginText}>Sign Up</Text> 
+                    <Text style={styles.loginText}>Sign up with Google</Text> 
             </TouchableOpacity>
-            <Text style={styles.remember}>Don't have an account?</Text> 
 
+
+            
+
+
+            
             
         </View>   
         </View>   

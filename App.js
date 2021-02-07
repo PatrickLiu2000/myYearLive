@@ -1,32 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import LoginView from './components/login/LoginView';
+import RegisterScreen from './components/register/RegisterScreen';
+import 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createStackNavigator } from '@react-navigation/stack';
+
+const Stack = createStackNavigator();
+
+
 
 export default function App() {
   return (
-    <View style={containerStyle.container}>
-      <View style={childStyle.container}>
-      <LoginView/>
-      </View>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+            name='LoginView'
+            component={LoginView}
+            options={{ 
+              title: 'Login',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, }}
+          />
+        <Stack.Screen
+          name='RegisterScreen'
+            component={RegisterScreen}
+            options={{ 
+              title: 'Register',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, 
+            }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const containerStyle = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#bbdfc8',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-});
 
-const childStyle = StyleSheet.create({
-  container: {
-    margin: 30,
-    // alignItems: 'flex-start',
-  }
-})
 
 const styles = StyleSheet.create({
   container: {
