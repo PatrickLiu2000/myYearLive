@@ -156,12 +156,7 @@ export default function LoginView() {
                 >
                     <Text style={styles.loginText}>Log In</Text>
             </TouchableOpacity>
-
-
-            
-
-
-            
+            <Text style={styles.remember}>Don't have an account?</Text> 
             <TouchableOpacity
                 title="Register"
                 onPress={() =>
@@ -170,7 +165,7 @@ export default function LoginView() {
                 style={styles.login_button}>
                     <Text style={styles.loginText}>Sign Up</Text> 
             </TouchableOpacity>
-            <Text style={styles.remember}>Don't have an account?</Text> 
+            
 
             
         </View>   
@@ -232,19 +227,18 @@ const containerStyle = StyleSheet.create({
           padding: 5,
           fontWeight: "bold",
           color: "#008891",
-          marginLeft: 30
+          marginLeft: 20
       },
 
       login_button: {
-          width: "50%",
           borderRadius: 10,
           height: 40,
           alignItems: "center",
-          marginTop: 35,
+          marginBottom: 10,
           justifyContent: "center",
           backgroundColor: "#008891",
-          marginHorizontal: 70
-
+          marginHorizontal: 70,
+          marginTop: 10
       },
 
       loginText: {

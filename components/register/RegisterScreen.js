@@ -142,7 +142,7 @@ export default function RegisterScreen() {
             </View>
 
             {/*PASSWORD*/}
-            <View style={[styles.footer, {marginTop: 35}]}>
+            <View style={[styles.footer]}>
                 <Text style={styles.text_footer}>Password</Text>
             </View>
 
@@ -230,6 +230,7 @@ const containerStyle = StyleSheet.create({
           color: "#008891",
           fontWeight: "bold",
           fontSize: 18,
+          marginTop: 15
       },
 
       textInput: {
@@ -243,19 +244,18 @@ const containerStyle = StyleSheet.create({
           padding: 5,
           fontWeight: "bold",
           color: "#008891",
-          marginLeft: 30
+          marginLeft: 5
       },
 
       login_button: {
-          width: "50%",
           borderRadius: 10,
           height: 40,
           alignItems: "center",
           marginTop: 35,
           justifyContent: "center",
           backgroundColor: "#008891",
-          marginHorizontal: 70
-
+          marginHorizontal: 70,
+          width: 200
       },
 
       loginText: {
