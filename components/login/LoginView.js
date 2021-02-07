@@ -16,7 +16,7 @@ import {
     
 async function onEmailSignInButton(email, password) {
     auth()
-    .createUserWithEmailAndPassword(email, password)
+    .signInWithEmailAndPassword(email, password)
     .then(() => {
         console.log('User account created & signed in!');
     })
@@ -30,6 +30,7 @@ async function onEmailSignInButton(email, password) {
         }
     
         console.error(error);
+        Alert.alert("Incorrect Username or Password!", [{text: "Okay"}] );
     });
 }
 
@@ -156,7 +157,13 @@ export default function LoginView() {
                 >
                     <Text style={styles.loginText}>Log In</Text>
             </TouchableOpacity>
-            <Text style={styles.remember}>Don't have an account?</Text> 
+            <TouchableOpacity
+                title="Google Sign-In"
+                onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+                style={styles.login_button}>
+                    <Text style={styles.loginText}>Log In with Google</Text> 
+            </TouchableOpacity>
+            <Text style={[styles.remember, {marginLeft: 80}]}>Don't have an account?</Text> 
             <TouchableOpacity
                 title="Register"
                 onPress={() =>
@@ -175,7 +182,7 @@ export default function LoginView() {
 
     return (
         <View style={containerStyle.container}>
-          <Text style={styles.remember}>Welcome {user.email}</Text>
+          <Text style={[styles.remember, {marginLeft: 0}]}>Welcome {user.email}</Text>
           <TouchableOpacity
                 title="Sign Out"
                 onPress={() => signOut().then(() => console.log('Signing out'))}
@@ -238,7 +245,8 @@ const containerStyle = StyleSheet.create({
           justifyContent: "center",
           backgroundColor: "#008891",
           marginHorizontal: 70,
-          marginTop: 10
+          marginTop: 10,
+          width: 200
       },
 
       loginText: {
