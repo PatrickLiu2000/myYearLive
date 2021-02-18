@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import LoginView from './components/login/LoginView';
 import RegisterScreen from './components/register/RegisterScreen';
+import SelectTemplate from './components/selectTemplate/SelectTemplate';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -29,6 +30,16 @@ export default function App() {
             component={RegisterScreen}
             options={{ 
               title: 'Register',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, 
+            }}
+        />
+        <Stack.Screen
+          name='SelectTemplate'
+            component={SelectTemplate}
+            options={{ 
+              title: 'Select Template',
               headerStyle: {
                 backgroundColor: '#009999',
               }, 
