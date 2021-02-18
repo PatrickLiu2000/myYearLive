@@ -189,6 +189,14 @@ export default function LoginView() {
                 style={styles.login_button}>
                     <Text style={styles.loginText}>Sign Out</Text> 
             </TouchableOpacity>
+            <TouchableOpacity
+                title="Select"
+                onPress={() =>
+                    navigation.navigate('SelectTemplate')
+                    }
+                style={styles.login_button}>
+                    <Text style={styles.loginText}>Select Template</Text> 
+            </TouchableOpacity>
         </View>
       );
 };
