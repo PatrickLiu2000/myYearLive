@@ -7,6 +7,7 @@ import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { createStackNavigator } from '@react-navigation/stack';
+import HomeView from './components/homeScreen/homeView';
 
 const Stack = createStackNavigator();
 
@@ -14,6 +15,39 @@ const Stack = createStackNavigator();
 
 export default function App() {
   return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+            name='homeView'
+            component={HomeView}
+            options={{ 
+              title: 'Home',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, }}
+          />
+//         <Stack.Screen
+//           name='RegisterScreen'
+//             component={RegisterScreen}
+//             options={{ 
+//               title: 'Register',
+//               headerStyle: {
+//                 backgroundColor: '#009999',
+//               }, 
+//             }}
+//         />
+//         <Stack.Screen
+//           name='SelectTemplate'
+//             component={SelectTemplate}
+//             options={{ 
+//               title: 'Select Template',
+//               headerStyle: {
+//                 backgroundColor: '#009999',
+//               }, 
+//             }}
+//         />
+//       </Stack.Navigator>
+    </NavigationContainer>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -30,16 +64,6 @@ export default function App() {
             component={RegisterScreen}
             options={{ 
               title: 'Register',
-              headerStyle: {
-                backgroundColor: '#009999',
-              }, 
-            }}
-        />
-        <Stack.Screen
-          name='SelectTemplate'
-            component={SelectTemplate}
-            options={{ 
-              title: 'Select Template',
               headerStyle: {
                 backgroundColor: '#009999',
               }, 
