@@ -182,7 +182,7 @@ export default function LoginView() {
 
     return (
         <View style={containerStyle.container}>
-          <Text style={[styles.remember, {marginLeft: 0}]}>Welcome {user.email}</Text>
+          <Text style={[styles.remember, {marginLeft: 0}]}>Welcome {user.email}!</Text>
           <TouchableOpacity
                 title="Sign Out"
                 onPress={() => signOut().then(() => console.log('Signing out'))}
@@ -190,12 +190,12 @@ export default function LoginView() {
                     <Text style={styles.loginText}>Sign Out</Text> 
             </TouchableOpacity>
             <TouchableOpacity
-                title="Select"
+                title="Pages"
                 onPress={() =>
-                    navigation.navigate('SelectTemplate')
+                    navigation.navigate('homeView')
                     }
                 style={styles.login_button}>
-                    <Text style={styles.loginText}>Select Template</Text> 
+                    <Text style={styles.loginText}>Preview Pages</Text> 
             </TouchableOpacity>
         </View>
       );

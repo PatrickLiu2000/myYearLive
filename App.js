@@ -17,40 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-            name='homeView'
-            component={HomeView}
-            options={{ 
-              title: 'Home',
-              headerStyle: {
-                backgroundColor: '#009999',
-              }, }}
-          />
-//         <Stack.Screen
-//           name='RegisterScreen'
-//             component={RegisterScreen}
-//             options={{ 
-//               title: 'Register',
-//               headerStyle: {
-//                 backgroundColor: '#009999',
-//               }, 
-//             }}
-//         />
-//         <Stack.Screen
-//           name='SelectTemplate'
-//             component={SelectTemplate}
-//             options={{ 
-//               title: 'Select Template',
-//               headerStyle: {
-//                 backgroundColor: '#009999',
-//               }, 
-//             }}
-//         />
-//       </Stack.Navigator>
-    </NavigationContainer>
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
+              <Stack.Screen
             name='LoginView'
             component={LoginView}
             options={{ 
@@ -59,7 +26,16 @@ export default function App() {
                 backgroundColor: '#009999',
               }, }}
           />
-        <Stack.Screen
+          <Stack.Screen
+            name='homeView'
+            component={HomeView}
+            options={{ 
+              title: 'Home',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, }}
+          />
+         <Stack.Screen
           name='RegisterScreen'
             component={RegisterScreen}
             options={{ 
@@ -69,8 +45,41 @@ export default function App() {
               }, 
             }}
         />
+        <Stack.Screen
+          name='SelectTemplate'
+            component={SelectTemplate}
+            options={{ 
+              title: 'Select Template',
+              headerStyle: {
+                backgroundColor: '#009999',
+              }, 
+            }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+        // <Stack.Screen
+        //     name='LoginView'
+        //     component={LoginView}
+        //     options={{ 
+        //       title: 'Login',
+        //       headerStyle: {
+        //         backgroundColor: '#009999',
+        //       }, }}
+        //   />
+    //     <Stack.Screen
+    //       name='RegisterScreen'
+    //         component={RegisterScreen}
+    //         options={{ 
+    //           title: 'Register',
+    //           headerStyle: {
+    //             backgroundColor: '#009999',
+    //           }, 
+    //         }}
+    //     />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
   );
 }
 
