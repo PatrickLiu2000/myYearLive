@@ -57,29 +57,6 @@ export default function App() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-        // <Stack.Screen
-        //     name='LoginView'
-        //     component={LoginView}
-        //     options={{ 
-        //       title: 'Login',
-        //       headerStyle: {
-        //         backgroundColor: '#009999',
-        //       }, }}
-        //   />
-    //     <Stack.Screen
-    //       name='RegisterScreen'
-    //         component={RegisterScreen}
-    //         options={{ 
-    //           title: 'Register',
-    //           headerStyle: {
-    //             backgroundColor: '#009999',
-    //           }, 
-    //         }}
-    //     />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
   );
 }
 
