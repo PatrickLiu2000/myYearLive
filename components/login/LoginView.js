@@ -106,7 +106,6 @@ export default function LoginView() {
 
     //Navigation
     const navigation = useNavigation();
-
     if (initializing) return null;
 
     if (!user) {
@@ -173,9 +172,7 @@ export default function LoginView() {
                     <Text style={styles.loginText}>Sign Up</Text> 
             </TouchableOpacity>
             
-
-            
-        </View>   
+            </View>   
         </View>   
         )
     }

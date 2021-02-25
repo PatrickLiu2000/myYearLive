@@ -8,6 +8,7 @@ import {
     StatusBar,
     TouchableOpacity,
     ScrollView,
+    FlatList
   } from 'react-native';
 
 const mockData = [
@@ -41,15 +42,35 @@ const styles = StyleSheet.create({
 
 export default function HomeView() {
   const navigation = useNavigation();
+  const [userPages, setuserPages] = React.useState([])
+  const addPage = () => {
+      setuserPages([...userPages, 
+      {
+        id: userPages.length + 1,
+        url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAY1BMVEX///8AAAAGBgatra3h4eHc3NwNDQ18fHz6+vqUlJT19fW5ubkUFBRZWVkmJiYRERGnp6dSUlJMTExFRUVqampeXl4wMDC6urqxsbFUVFQsLCzZ2dlBQUGioqJ2dnaRkZF/f39xRK95AAACgElEQVR4nO2dW1PCQAxG2V4AKS1QpHJR5P//SmEYx13EcUaSNFPPeSf5Dt1ulwfS0QgAAAAAAAAAAAAAAAAAAIbGrDq2zSILwmSLpj1WMzONaieukOjsKhONfK9pcaXL1TUOr/oaF9alrsfb2MYjhPFS0+NopXFhoufxbOkRwrOWh+n1uKB0Td6sPUJQuU8OZvf5F2ONvcto301Zy3ss+/AIYSsucvM8zzZ5MZXuMS3yzc3pp5PusU3r14V0g0+KXdpJ+ty1Sqo/CVdPeEq/Mtnis8zM48Ykkz3VbxW/pO8kq0t2bcUP9Uzt/vikiK+/7OO9jSpvRCvfpY7ataKVm6iy/o+eUR61a0QrL6LK6ivrvLaidnPRyvGiFX8Ofmca35KileNtRLSwdT9EvPVDxFs/RLz1Q8Rbv38vYv05d4EQ8RYIEW+BEPEWCBFvgRDxFggRb4EQ8RYIEW+BEPEWCBFvgRDxFqg3kfAAiCCCCCKIIIIIIoj8rbD159wFQsRbIES8BULEWyBEvAVCxFsgRLwFQsRbIES8BULEWyBEvAVCxFsgdyLu+iHirR8i3voh4q0fIt76DUZkMH/MNx6VUEbtZEcl9Di8Yi9aucdxIivRyoMZ8FLF28hOtPQdkolLsiN3TIcgvce9hIcgpXOJdE0SD/GJS8naOq8uvUFh6SSv8CLdoEvrZ7XG6LYyr7VHtyVbuyHyw/RG6z48ZGdSXSmHMnCyj0mNSqehibXHScdjOGNyja/JSc/jfJ/YjZJW/rVQGu3CrfJw7zPb7vcYj9IpPAfvUN2eI2TJavHz1Y/MqknbzOVfSTDfryaGryQAAAAAAAAAAAAAAAAAAAArPgB57yJcMN9cyQAAAABJRU5ErkJggg=='
+        // add other page props here
+      }]);
+      console.log(userPages)
+  }
+  const deletePage = index => {
+    const newTimes = [...userPages];
+    newTimes.splice(index, 1);
+    for (i = 0; i < newTimes.length; i++) {
+      newTimes[i].id = i + 1;
+    }
+    setuserPages(newTimes);
+    console.log(newTimes)
+  }
     return (
       <View style={styles.view}>
         <TouchableOpacity onPress={() =>
-            navigation.navigate('SelectTemplate')
+            // navigation.navigate('SelectTemplate')
+            addPage()
           }>
           <Image style={styles.template} source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAY1BMVEX///8AAAAGBgatra3h4eHc3NwNDQ18fHz6+vqUlJT19fW5ubkUFBRZWVkmJiYRERGnp6dSUlJMTExFRUVqampeXl4wMDC6urqxsbFUVFQsLCzZ2dlBQUGioqJ2dnaRkZF/f39xRK95AAACgElEQVR4nO2dW1PCQAxG2V4AKS1QpHJR5P//SmEYx13EcUaSNFPPeSf5Dt1ulwfS0QgAAAAAAAAAAAAAAAAAAIbGrDq2zSILwmSLpj1WMzONaieukOjsKhONfK9pcaXL1TUOr/oaF9alrsfb2MYjhPFS0+NopXFhoufxbOkRwrOWh+n1uKB0Td6sPUJQuU8OZvf5F2ONvcto301Zy3ss+/AIYSsucvM8zzZ5MZXuMS3yzc3pp5PusU3r14V0g0+KXdpJ+ty1Sqo/CVdPeEq/Mtnis8zM48Ykkz3VbxW/pO8kq0t2bcUP9Uzt/vikiK+/7OO9jSpvRCvfpY7ataKVm6iy/o+eUR61a0QrL6LK6ivrvLaidnPRyvGiFX8Ofmca35KileNtRLSwdT9EvPVDxFs/RLz1Q8Rbv38vYv05d4EQ8RYIEW+BEPEWCBFvgRDxFggRb4EQ8RYIEW+BEPEWCBFvgRDxFqg3kfAAiCCCCCKIIIIIIoj8rbD159wFQsRbIES8BULEWyBEvAVCxFsgRLwFQsRbIES8BULEWyBEvAVCxFsgdyLu+iHirR8i3voh4q0fIt76DUZkMH/MNx6VUEbtZEcl9Di8Yi9aucdxIivRyoMZ8FLF28hOtPQdkolLsiN3TIcgvce9hIcgpXOJdE0SD/GJS8naOq8uvUFh6SSv8CLdoEvrZ7XG6LYyr7VHtyVbuyHyw/RG6z48ZGdSXSmHMnCyj0mNSqehibXHScdjOGNyja/JSc/jfJ/YjZJW/rVQGu3CrfJw7zPb7vcYj9IpPAfvUN2eI2TJavHz1Y/MqknbzOVfSTDfryaGryQAAAAAAAAAAAAAAAAAAAArPgB57yJcMN9cyQAAAABJRU5ErkJggg=='}} />
           <Text style={styles.label}>New</Text>        
         </TouchableOpacity>
-        {
+        {/* {
           mockData.map(template => {
             return (
               <TouchableOpacity>
@@ -61,7 +82,24 @@ export default function HomeView() {
               </TouchableOpacity>
             )
           })
-        }
+        } */}
+        <FlatList
+          data={userPages}
+          renderItem={({item, index}) => 
+          <View>
+            <TouchableOpacity>
+                <Image 
+                  source={{uri: item.url}}
+                  style={styles.template}
+                />
+                <Text style={styles.label}>Page {item.id}</Text>
+              </TouchableOpacity>
+            <TouchableOpacity onPress= {() => deletePage(index)} >
+              <Text style = {styles.label}>DELETE</Text>
+            </TouchableOpacity>
+          </View>
+          }
+        />
       </View>
     )
 }
