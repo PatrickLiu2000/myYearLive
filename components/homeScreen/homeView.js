@@ -5,7 +5,6 @@ import {
     Text,
     Image,
     StyleSheet,
-    StatusBar,
     TouchableOpacity,
     ScrollView,
     FlatList
