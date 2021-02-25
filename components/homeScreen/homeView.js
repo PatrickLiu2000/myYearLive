@@ -19,8 +19,8 @@ const mockData = [
 
 const styles = StyleSheet.create({
   template: {
-    width: 100,
-    height: 125,
+    width: 75,
+    height: 100,
     marginTop: 20,
     marginRight: 20,
     marginLeft: 20
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
 
   label: {
     position: 'relative',
-    fontSize: 20,
+    fontSize: 15,
     textAlign: 'center',
     color: '#008891'
   }
@@ -87,7 +87,7 @@ export default function HomeView() {
           data={userPages}
           renderItem={({item, index}) => 
           <View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("SelectTemplate")}>
                 <Image 
                   source={{uri: item.url}}
                   style={styles.template}
