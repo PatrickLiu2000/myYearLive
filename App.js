@@ -9,6 +9,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeView from './components/homeScreen/homeView';
 import MathTemplate from './components/selectTemplate/MathTemplate';
+import GradTemplate from './components/selectTemplate/GradTemplate';
+
 
 const Stack = createStackNavigator();
 
@@ -18,7 +20,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-              <Stack.Screen
+            <Stack.Screen
             name='LoginView'
             component={LoginView}
             options={{ 
@@ -55,7 +57,7 @@ export default function App() {
                 backgroundColor: '#009999',
               }, 
             }}
-        />
+        /> 
 
         {/* MATH TEMPLATE */}
         <Stack.Screen
@@ -67,8 +69,17 @@ export default function App() {
             backgroundColor: '#009999',
           }, 
         }}
-
         />
+        {/* MATH TEMPLATE */}
+        <Stack.Screen
+        name='GradTemplate'
+        component={GradTemplate}
+        options={{ 
+          title: 'Grad Template',
+          headerStyle: {
+            backgroundColor: '#009999',
+          }, 
+        }} />
 
 
 
