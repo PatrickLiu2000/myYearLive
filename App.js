@@ -18,7 +18,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-              {/* <Stack.Screen
+              <Stack.Screen
             name='LoginView'
             component={LoginView}
             options={{ 
@@ -55,7 +55,7 @@ export default function App() {
                 backgroundColor: '#009999',
               }, 
             }}
-        /> */}
+        />
 
         {/* MATH TEMPLATE */}
         <Stack.Screen

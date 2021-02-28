@@ -2,7 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 
 import { ListItem, Icon } from 'react-native-elements'
-
+import { useNavigation } from '@react-navigation/native';
 
 const full_list = [
 	{
@@ -21,20 +21,11 @@ const full_list = [
 ]
 
 
-
-async function openTemplate() {
-	console.log("Opening Template")
-}
-
-
-
-
 export default function SelectTemplate() {
   
     const [search, setSearch] = useState('')
     const [list, setList] = useState(full_list)
-
-
+    const navigation = useNavigation();
     useEffect(() => {
         setList(full_list.filter(template => template.title.toLowerCase().startsWith(search.toLowerCase())))
     }, [search]
@@ -57,7 +48,7 @@ export default function SelectTemplate() {
         {
             list.map((item, i) => (
             <ListItem key={i} bottomDivider
-                onPress={() => openTemplate()}
+                onPress={() => navigation.navigate(item.title + 'Template')}
             >
                 <Icon name={item.icon} />
                 <ListItem.Content>
