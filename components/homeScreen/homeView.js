@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
   template: {
     width: 75,
     height: 100,
-    marginTop: 20,
-    marginRight: 20,
-    marginLeft: 20
+    marginTop: 30,
+    marginRight: 30,
+    marginLeft: 30
   },
   view: {
     flexDirection: 'row',
@@ -35,11 +35,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#008891'
   }
-
-  
 });
 
 export default function HomeView() {
+  const numColumns = 2;
   const navigation = useNavigation();
   const [userPages, setuserPages] = React.useState([])
   const addPage = () => {
@@ -51,6 +50,7 @@ export default function HomeView() {
       }]);
       console.log(userPages)
   }
+
   const deletePage = index => {
     const newTimes = [...userPages];
     newTimes.splice(index, 1);
@@ -84,6 +84,7 @@ export default function HomeView() {
         } */}
         <FlatList
           data={userPages}
+          numColumns = {numColumns}
           renderItem={({item, index}) => 
           <View>
             <TouchableOpacity onPress={() => navigation.navigate("SelectTemplate")}>
@@ -102,4 +103,3 @@ export default function HomeView() {
       </View>
     )
 }
-  
