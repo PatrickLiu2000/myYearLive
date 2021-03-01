@@ -11,7 +11,7 @@ import {
   } from 'react-native';
 
 
-  export default function MathTemplate() {
+  export default function GraduationTemplate() {
       return (
     <View style={styles.container}>
         <ImageBackground source={require('./GradTemplate.png')} style={styles.image}>
