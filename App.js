@@ -72,7 +72,7 @@ export default function App() {
         />
         {/* MATH TEMPLATE */}
         <Stack.Screen
-        name='GradTemplate'
+        name='GraduationTemplate'
         component={GradTemplate}
         options={{ 
           title: 'Grad Template',
