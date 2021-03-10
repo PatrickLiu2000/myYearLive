@@ -1,9 +1,8 @@
 import React from 'react';
 import * as ImagePicker from 'react-native-image-picker';
 import auth from '@react-native-firebase/auth';
-import storage from '@react-native-firebase/storage'
-
-
+import storage from '@react-native-firebase/storage';
+import SaveFooter from './SaveFooter'
 import {
     View,
     Text,
@@ -12,6 +11,7 @@ import {
     TouchableOpacity,
     Alert,
   } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 
@@ -23,7 +23,7 @@ export default function UploadImageButton() {
   if (response == null || response.uri == null) {
     return (
     <View style={styles.container}>
-        
+        <ScrollView>
             <TouchableOpacity
             onPress={() => {
               ImagePicker.launchImageLibrary(
@@ -34,7 +34,6 @@ export default function UploadImageButton() {
                   maxWidth: 200,
                 },
                 (response) => {
-                  console.log(response)
                   setResponse(response);
                 },
               )
@@ -42,12 +41,14 @@ export default function UploadImageButton() {
             }>
               <Text style={styles.button}>+</Text>
           </TouchableOpacity>
-
+          </ScrollView>
+          <SaveFooter uri = {null}/>
     </View>
     )
   }
   return(
-    <View style={styles.container}>        
+    <View style={styles.container}>
+      <ScrollView >     
       {response && (
       <View style={styles.image}>
         <Image
@@ -74,33 +75,11 @@ export default function UploadImageButton() {
       }>
         <Text style={styles.changeImage}>Change Image</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        onPress={async() => {
-          console.log(response.uri)
-          const uri = response.uri
-          const user = auth().currentUser
-          console.log(user)
-          const filename = user.uid
-          const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-          
-          const task = storage()
-            .ref(filename)
-            .putFile(uploadUri);
-          
-          try {
-            await task;
-          } catch (e) {
-            console.error(e);
-          }
-          Alert.alert(
-            'Photo uploaded!',
-            'Your photo has been uploaded to Firebase Cloud Storage!'
-          );
-        }
-        }>
-        <Text style={styles.changeImage}>Upload to firebase</Text>
-      </TouchableOpacity>
-  
+      
+      
+      </ScrollView>  
+
+      <SaveFooter uri = {response.uri}/>
   </View>
   )
   
@@ -112,13 +91,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection:'column',
-        justifyContent:'center'
+        justifyContent:'center',
+        alignItems: 'center'
     },
 
     image: {
         flex: 1,
         resizeMode:'cover',
         justifyContent: 'center',
+        alignItems:'center'
         
     },
 
@@ -137,7 +118,24 @@ const styles = StyleSheet.create({
       marginVertical: 24,
       alignItems: 'center',
       borderRadius: 400/2
-    }
+    },
+    footer: {
+      borderRadius: 10,
+      height: 80,
+      alignItems: "center",
+      marginBottom: 0,
+      justifyContent: "center",
+      backgroundColor: "#008891",
+      marginHorizontal: 70,
+      marginTop: 10,
+      width: 600
+    },
+    loginText: {
+      fontWeight: "bold",
+      fontSize: 18,
+      color: "#fff",
+    },
+
 
 });
 
