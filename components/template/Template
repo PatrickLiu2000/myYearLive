@@ -1,0 +1,96 @@
+import React from 'react';
+import {useState} from "react";
+import { StyleSheet, Text, View, FlatList, Dimensions, TextInput, TouchableOpacity} from 'react-native';
+const numColumns = 3;
+
+export default function Template() {
+ 
+  const data = [
+    { key: '1' }, { key: '2' }, { key: '3' }, { key: '4' }, { key: '5' }, { key: '6' }, { key: '7' }, { key: '8' }, { key: '9' },
+     {key: '10'}, {key: '11'}, {key: '12'}, {key: '13'}, {key: '14'}, {key: '15'}
+  ];
+  const [userTitle, setUserTitle] = useState('title');
+
+  return (
+
+    <View style = {styles.view}>
+
+       {/* TITLE */}
+      <TextInput 
+        style = {styles.title}
+        placeholder = 'Section Title' 
+        onChangeText={(val) => setUserTitle(val)} />
+
+      {/* PICTURES */}
+      
+      <FlatList
+        data = {data}
+        numColumns = {numColumns}
+        renderItem={({item, index}) => 
+        <View style = {styles.view}>
+          <TouchableOpacity
+                style = {styles.box} />
+              
+        
+        
+        
+        </View>
+        }
+        
+        />
+
+    </View>
+
+  )
+
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginVertical: 20,
+  },
+  box: {
+    borderWidth: 1,
+    borderColor: '#999',
+    padding: 8,
+    margin: 10,
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    
+    
+  },
+  item: {
+    backgroundColor: '#4D243D',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    margin: 1,
+    height: Dimensions.get('window').width / numColumns, // approximate a square
+  },
+  itemInvisible: {
+    backgroundColor: 'transparent',
+  },
+  itemText: {
+    color: '#fff',
+  },
+  title: {
+    borderWidth: 1,
+    borderColor: '#999',
+    position: 'relative',
+    padding: 8,
+    margin: 8,
+    width: 350,
+    marginLeft: 30,
+    marginTop: 60,
+    fontWeight: 'bold',
+    fontSize: 24
+  },
+  view: {
+   // flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginLeft: 10
+  },
+});
