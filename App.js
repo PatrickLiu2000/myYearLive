@@ -12,6 +12,11 @@ import MathTemplate from './components/selectTemplate/MathTemplate';
 import GradTemplate from './components/selectTemplate/GradTemplate';
 
 
+
+import Emoji from './components/addEmoji/Emoji';
+
+import Stickers from './components/addStickers/Stickers'
+
 const Stack = createStackNavigator();
 
 
@@ -20,7 +25,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-            <Stack.Screen
+
+
+            {/* <Stack.Screen
             name='LoginView'
             component={LoginView}
             options={{ 
@@ -59,7 +66,7 @@ export default function App() {
             }}
         /> 
 
-        {/* MATH TEMPLATE */}
+        
         <Stack.Screen
         name='MathTemplate'
         component={MathTemplate}
@@ -70,7 +77,7 @@ export default function App() {
           }, 
         }}
         />
-        {/* MATH TEMPLATE */}
+        
         <Stack.Screen
         name='GraduationTemplate'
         component={GradTemplate}
@@ -79,8 +86,37 @@ export default function App() {
           headerStyle: {
             backgroundColor: '#009999',
           }, 
-        }} />
+        }} /> */}
 
+  {/* <Stack.Screen
+          name='Stickers'
+          component={Stickers}
+          options={{ 
+            title: 'Adding Stickers',
+            headerStyle: {
+              backgroundColor: '#009999',
+            }, 
+          }} /> */}
+
+{/* <Stack.Screen
+        name='Emoji'
+        component={Emoji}
+        options={{ 
+          title: 'Adding Emoji',
+          headerStyle: {
+            backgroundColor: '#009999',
+          }, 
+        }} /> */}
+
+<Stack.Screen
+        name='Stickers'
+        component={Stickers}
+        options={{ 
+          title: 'Stickers',
+          headerStyle: {
+            backgroundColor: '#009999',
+          }, 
+        }} />
 
 
       </Stack.Navigator>
