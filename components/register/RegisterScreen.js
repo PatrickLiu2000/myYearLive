@@ -1,5 +1,6 @@
 import React, { Component, useState, useEffect } from 'react';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore'
 import { GoogleSignin } from '@react-native-community/google-signin';
 import { useNavigation } from '@react-navigation/native';
 import { 
@@ -19,6 +20,11 @@ async function onEmailSignInButton(email, password) {
     .createUserWithEmailAndPassword(email, password)
     .then(() => {
         console.log('User account created & signed in!');
+        let curUser = auth().currentUser;
+        firestore().collection('users').doc(curUser.uid).set({
+            email: curUser.email,
+            pages: [],
+        })
     })
     .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -62,18 +68,6 @@ export default function RegisterScreen() {
         email: '',
         password: '',
     })
-
-    const loginHandle = (email, password) => {
-        if (data.email.length == 0 || data.password.length == 0){
-            Alert.alert("Email or password is invalid.", [{text: "Okay"}] );
-            return;
-        }
-
-        if(data.email.length >= 20 || data.password.length >= 20){
-            Alert.alert("Email or password cannot be longer than 20 characters", [{text: "Okay"}] );
-            return;
-        }
-    }
 
 
     // EMAIL/PASS 
@@ -121,7 +115,7 @@ export default function RegisterScreen() {
                 style={styles.TextInput}
                 placeholder="Your Name"
                 autoCapitalize = "none"
-                // placeholderTextColor="#003F5C"
+                onChangeText={(email) => setEmail(email)}
                 />
             </View>
 
@@ -178,12 +172,6 @@ export default function RegisterScreen() {
                     <Text style={styles.loginText}>Sign up with Google</Text> 
             </TouchableOpacity>
 
-
-            
-
-
-            
-            
         </View>   
         </View>   
         )
