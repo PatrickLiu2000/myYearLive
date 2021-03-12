@@ -9,15 +9,14 @@ import {
     TouchableOpacity,
     ScrollView,
   } from 'react-native';
+import UploadImageButton from './UploadImageButton'
 
 
   export default function GraduationTemplate() {
       return (
     <View style={styles.container}>
         <ImageBackground source={require('./GradTemplate.png')} style={styles.image}>
-            <TouchableOpacity>
-                <Text style={styles.button}>+</Text>
-            </TouchableOpacity>
+            <UploadImageButton></UploadImageButton>
 
         </ImageBackground>
 
