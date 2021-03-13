@@ -52,9 +52,9 @@ async function onGoogleButtonPress() {
   
     // Create a Google credential with the token
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-  
+
     // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+    return auth().signInWithCredential(googleCredential)
 }
 
 export default function LoginView() {
@@ -65,17 +65,6 @@ export default function LoginView() {
         password: '',
     })
 
-    const loginHandle = (email, password) => {
-        if (data.email.length == 0 || data.password.length == 0){
-            Alert.alert("Email or password is invalid.", [{text: "Okay"}] );
-            return;
-        }
-
-        if(data.email.length >= 20 || data.password.length >= 20){
-            Alert.alert("Email or password cannot be longer than 20 characters", [{text: "Okay"}] );
-            return;
-        }
-    }
 
 
     // EMAIL/PASS 
@@ -95,7 +84,7 @@ export default function LoginView() {
 
     // Handle user state changes
     function onAuthStateChanged(user) {
-        setUser(user);
+        setUser(user)
         if (initializing) setInitializing(false);
     }
 

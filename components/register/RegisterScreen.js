@@ -58,7 +58,13 @@ async function onGoogleButtonPress() {
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
   
     // Sign-in the user with the credential
-    return auth().signInWithCredential(googleCredential);
+    auth().signInWithCredential(googleCredential).then(() => {
+        let curUser = auth().currentUser
+        firestore().collection('users').doc(curUser.uid).set({
+            email: curUser.email,
+            pages: [],
+        })
+    });;
 }
 
 export default function RegisterScreen() {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useNavigation } from '@react-navigation/native';
 import {
     View,
@@ -7,7 +7,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     ScrollView,
-    FlatList
+    FlatList,
+    Alert
   } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'
@@ -68,6 +69,18 @@ export default function HomeView() {
   const numColumns = 3;
   const navigation = useNavigation();
   const [userPages, setuserPages] = React.useState([])
+  useEffect(() => {
+    const subscriber = firestore()
+      .collection('users')
+      .doc(auth().currentUser.uid)
+      .onSnapshot(documentSnapshot => {
+          // console.log()
+          setuserPages(documentSnapshot.data().pages)
+        });
+    // Unsubscribe from events when no longer in use
+    return () => subscriber();
+  }, []);
+  
   const [madeEdits, setMadeEdits] = React.useState(false)
   const addPage = () => {
       setuserPages([...userPages, 
@@ -94,6 +107,9 @@ export default function HomeView() {
     firestore().collection('users').doc(curUser.uid).update({
       pages: userPages
     })
+    Alert.alert(
+      'Saved Yearbook Pages to Database!'
+    )
   }
     return (
       <View style={styles.view}>
