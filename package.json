@@ -31,7 +31,8 @@
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.14.0",
     "react-native-stickers": "^0.0.2",
-    "react-native-vector-icons": "^7.1.0"
+    "react-native-vector-icons": "^7.1.0",
+    "rxjs": "^5.5.12"
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",

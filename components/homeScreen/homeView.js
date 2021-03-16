@@ -93,10 +93,11 @@ export default function HomeView() {
       setMadeEdits(true)
   }
 
+
   const deletePage = index => {
     const newTimes = [...userPages];
     newTimes.splice(index, 1);
-    for (i = 0; i < newTimes.length; i++) {
+    for (var i = 0; i < newTimes.length; i++) {
       newTimes[i].id = i + 1;
     }
     setuserPages(newTimes);
@@ -110,6 +111,14 @@ export default function HomeView() {
     Alert.alert(
       'Saved Yearbook Pages to Database!'
     )
+  }
+
+  const goToPage = (item) => {
+    if (item.template == null) {
+      navigation.navigate("SelectTemplate")
+    } else {
+      navigation.navigate("PageViewer", item)
+    }
   }
     return (
       <View style={styles.view}>
@@ -128,7 +137,7 @@ export default function HomeView() {
           numColumns = {numColumns}
           renderItem={({item, index}) => 
           <View>
-            <TouchableOpacity onPress={() => navigation.navigate("SelectTemplate")}>
+            <TouchableOpacity onPress={() => goToPage(item)}>
                 <Image 
                   source={{uri: item.url}}
                   style={styles.template}
