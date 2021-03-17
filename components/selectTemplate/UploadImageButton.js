@@ -1,8 +1,5 @@
 import React from 'react';
 import * as ImagePicker from 'react-native-image-picker';
-import auth from '@react-native-firebase/auth';
-import storage from '@react-native-firebase/storage';
-import SaveFooter from './SaveFooter'
 import {
     View,
     Text,
@@ -11,19 +8,23 @@ import {
     TouchableOpacity,
     Alert,
   } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 
 
 
 
 
-export default function UploadImageButton() {
+export default function UploadImageButton({setUri}) {
   const [response, setResponse] = React.useState(null)
+  React.useEffect(() => {
+    if (response != null) {
+      setUri(response.uri)
+    }
+  }, [response]
+  );
 
   if (response == null || response.uri == null) {
     return (
     <View style={styles.container}>
-        <ScrollView>
             <TouchableOpacity
             onPress={() => {
               ImagePicker.launchImageLibrary(
@@ -35,20 +36,22 @@ export default function UploadImageButton() {
                 },
                 (response) => {
                   setResponse(response);
+                  
                 },
               )
+              if (response) {
+                console.log('here')
+                setUri(response.uri)
+              }
             }
             }>
               <Text style={styles.button}>+</Text>
           </TouchableOpacity>
-          </ScrollView>
-          <SaveFooter uri = {null}/>
     </View>
     )
   }
   return(
     <View style={styles.container}>
-      <ScrollView >     
       {response && (
       <View style={styles.image}>
         <Image
@@ -67,7 +70,6 @@ export default function UploadImageButton() {
               maxWidth: 200,
             },
             (response) => {
-              console.log(response)
               setResponse(response);
             },
           )
@@ -77,9 +79,7 @@ export default function UploadImageButton() {
       </TouchableOpacity>
       
       
-      </ScrollView>  
 
-      <SaveFooter uri = {response.uri}/>
   </View>
   )
   

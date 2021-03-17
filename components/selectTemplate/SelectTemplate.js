@@ -1,28 +1,35 @@
 import React, {useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-
 import { ListItem, Icon } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
+
 
 const full_list = [
 	{
 	  title: 'Sports',
-	  icon: 'sports-football'
+    icon: 'sports-football',
+    
 	},
 	{
 		title: 'Graduation',
-		icon: 'school'
+    icon: 'school',
 	  },
 	{
 		title: 'Math',
-		icon: 'superscript'
+    icon: 'superscript',
+    
 	},
 	
 ]
 
 
-export default function SelectTemplate() {
-  
+
+ 
+
+export default function SelectTemplate({route}) {
+    
+    const [page, setPage] = useState(route.params)
+
     const [search, setSearch] = useState('')
     const [list, setList] = useState(full_list)
     const navigation = useNavigation();
@@ -31,6 +38,10 @@ export default function SelectTemplate() {
     }, [search]
     );
 
+    const goToPage = (page, setPage) => {
+      page.background = 'GradTemplate.png'
+      navigation.navigate("PageViewer", page)
+    }
 
   
 
@@ -48,7 +59,7 @@ export default function SelectTemplate() {
         {
             list.map((item, i) => (
             <ListItem key={i} bottomDivider
-                onPress={() => navigation.navigate(item.title + 'Template')}
+                onPress={() => goToPage(page, setPage)}
             >
                 <Icon name={item.icon} />
                 <ListItem.Content>
