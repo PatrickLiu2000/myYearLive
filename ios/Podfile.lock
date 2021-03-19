@@ -633,7 +633,7 @@ PODS:
     - Firebase/Auth (~> 7.4.0)
     - React-Core
     - RNFBApp
-  - RNFBFirestore (11.0.0):
+  - RNFBFirestore (11.1.0):
     - Firebase/Firestore (~> 7.4.0)
     - React-Core
     - RNFBApp
@@ -890,7 +890,7 @@ SPEC CHECKSUMS:
   RNCMaskedView: 5a8ec07677aa885546a0d98da336457e2bea557f
   RNFBApp: 43a062dc6a1a88edd934d2229d1ba64f25381598
   RNFBAuth: b5b1ba3df98f23b1f41829b762477ccb60b0e747
-  RNFBFirestore: 58e533a2c3d69847140ff8b05bf2c5fa05246a74
+  RNFBFirestore: 303bfe2c0c9826ba9796226b4cb88f55a473ff17
   RNFBStorage: d53a14be45f1674a481f305a00caa919e66149f0
   RNGestureHandler: 7a5833d0f788dbd107fbb913e09aa0c1ff333c39
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
@@ -900,6 +900,6 @@ SPEC CHECKSUMS:
   Yoga: 7d13633d129fd179e01b8953d38d47be90db185a
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: e4990fc21d0fc654b6b077142979442ec8216ec6
+PODFILE CHECKSUM: 7c2fdf3502a70587cc2f7bc81a39d7b3fb0ca00b
 
 COCOAPODS: 1.10.1

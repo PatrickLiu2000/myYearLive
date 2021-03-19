@@ -10,6 +10,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeView from './components/homeScreen/homeView';
 import MathTemplate from './components/selectTemplate/MathTemplate';
 import GradTemplate from './components/selectTemplate/GradTemplate';
+import PageViewer from './components/pageViewer/PageViewer'
 
 
 
@@ -107,6 +108,17 @@ export default function App() {
             backgroundColor: '#009999',
           }, 
         }} /> }
+
+        <Stack.Screen
+        name='PageViewer'
+        component={PageViewer}
+        options={{ 
+          title: 'Page Viewer',
+          headerStyle: {
+            backgroundColor: '#009999',
+          }, 
+        }}
+        />
 
 
       </Stack.Navigator>
