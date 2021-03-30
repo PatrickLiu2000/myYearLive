@@ -10,6 +10,7 @@ import {
     Alert,
   } from 'react-native';
 
+//   For each image uri, upload to firestore and storage  
 export default function SaveFooter({uri, updateImages, page}) {
     const [images, setImages] = React.useState(page.images)
 
@@ -24,7 +25,7 @@ export default function SaveFooter({uri, updateImages, page}) {
         
     const savePage = async (uri) => {
         const user = auth().currentUser
-        const filename = user.uid + '/' + Date.now() + '.jpg'
+        const filename = user.uid + '/' + page.id + "/" +Date.now() + '.jpg'
         const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
         
         const task = storage()
@@ -36,9 +37,7 @@ export default function SaveFooter({uri, updateImages, page}) {
         } catch (e) {
             console.error(e);
         }
-        console.log("imagesss")
         setImages([...images, filename])
-        console.log(images)
 
         updateImages(images)
         Alert.alert(
@@ -72,13 +71,15 @@ const styles = StyleSheet.create({
     
     footer: {
       borderRadius: 10,
-      height: 100,
+      height: 70,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: "#008891",
-      marginHorizontal: -40,
-      marginTop: 10,
-      width: 500
+      
+      position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: 440,
     },
     loginText: {
       fontWeight: "bold",

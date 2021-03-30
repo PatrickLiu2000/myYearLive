@@ -112,13 +112,18 @@ export default function HomeView() {
     Alert.alert(
       'Saved Yearbook Pages to Database!'
     )
+    setMadeEdits(false)
   }
 
   const goToPage = (item) => {
-    if (item.background == "") {
-      navigation.navigate("SelectTemplate", item)
+    if (madeEdits) {
+      Alert.alert("You must save before you can edit your pages")
     } else {
-      navigation.navigate("PageViewer", item)
+      if (item.background == "") {
+        navigation.navigate("SelectTemplate", item)
+      } else {
+        navigation.navigate("PageViewer", item)
+      }
     }
   }
     return (

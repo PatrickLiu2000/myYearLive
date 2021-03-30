@@ -38,8 +38,9 @@ export default function SelectTemplate({route}) {
     }, [search]
     );
 
-    const goToPage = (page, setPage) => {
-      page.background = 'GradTemplate.png'
+    const goToPage = (page, item) => {
+      console.log(item)
+      page.background = item.title + 'Template.png'
       navigation.navigate("PageViewer", page)
     }
 
@@ -59,7 +60,7 @@ export default function SelectTemplate({route}) {
         {
             list.map((item, i) => (
             <ListItem key={i} bottomDivider
-                onPress={() => goToPage(page, setPage)}
+                onPress={() => goToPage(page, item)}
             >
                 <Icon name={item.icon} />
                 <ListItem.Content>
