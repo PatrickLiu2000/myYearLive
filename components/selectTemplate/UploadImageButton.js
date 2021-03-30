@@ -55,7 +55,7 @@ export default function UploadImageButton({setUri}) {
       {response && (
       <View style={styles.image}>
         <Image
-          style={{width: 200, height: 200, borderColor:'black', borderWidth:5}}
+          style={{width: 150, height: 150, borderColor:'black', borderWidth:5}}
           source={{uri: response.uri}}
         />
       </View>
@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection:'column',
         justifyContent:'center',
-        alignItems: 'center'
     },
 
     image: {

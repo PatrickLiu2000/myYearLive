@@ -10,8 +10,8 @@ import {
     Alert,
   } from 'react-native';
 
-export default function SaveFooter({uri, updateImages, page}) {
-    const [images, setImages] = React.useState(page.images)
+//   For each image uri, upload to firestore and storage  
+export default function SaveFooter({images, page}) {
 
     const addImage = (userDoc, images, doc) => {
         let pagesList = doc._data.pages
@@ -22,33 +22,48 @@ export default function SaveFooter({uri, updateImages, page}) {
         })
     }
         
-    const savePage = async (uri) => {
-        const user = auth().currentUser
-        const filename = user.uid + '/' + Date.now() + '.jpg'
-        const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-        
-        const task = storage()
-            .ref(filename)
-            .putFile(uploadUri);
-        
-        try {
-            await task;
-        } catch (e) {
-            console.error(e);
-        }
-        console.log("imagesss")
-        setImages([...images, filename])
-        console.log(images)
+    const savePage = async () => {
 
-        updateImages(images)
-        Alert.alert(
-            'Photo uploaded!',
-            'Your photo has been uploaded!'
-        );
+        const user = auth().currentUser
+        var imageURLs = []
+        var topRef = await storage().ref("")
+        var storageRef = await storage().ref(user.uid + "/" + page.id + "/")
+        var filesList = await storageRef.listAll()
+        var filesInStorage = filesList["items"]
+        console.log(filesInStorage)
+        
+        for (var i = 0; i < images.length; i++) {
+            const filename = user.uid + '/' + page.id + "/" +Date.now() + '.jpg'
+            const uploadUri = Platform.OS === 'ios' ? images[i].replace('file://', '') : images[i];
+            imageURLs.push(filename)
+            
+            const task = storage()
+                .ref(filename)
+                .putFile(uploadUri);
+            
+            try {
+                await task;
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        for (var j = 0; j < filesInStorage.length; j++) {
+            if (imageURLs.indexOf(filesInStorage[j]["path"]) < 0) {
+                var delRef = topRef.child(filesInStorage[j]["path"])
+                delRef.delete().then(() => {
+                    console.log("d")
+                  }).catch((error) => {
+                    console.log(error)
+                  });
+            }
+            // console.log(filesInStorage[j]["path"])
+        }
+
+        
         var userDoc = await firestore().collection('users').doc(user.uid)
         userDoc.get().then((doc) => {
             if (doc.exists) {
-                addImage(userDoc, images, doc)
+                addImage(userDoc, imageURLs, doc)
                 
             } else {
                 console.log("No such document!");
@@ -60,7 +75,7 @@ export default function SaveFooter({uri, updateImages, page}) {
         
         return (
             <TouchableOpacity style={styles.footer}
-                onPress={() => savePage(uri)}>
+                onPress={() => savePage()}>
             <Text style={styles.loginText}>Save</Text>
             
         </TouchableOpacity>
@@ -72,13 +87,15 @@ const styles = StyleSheet.create({
     
     footer: {
       borderRadius: 10,
-      height: 100,
+      height: 70,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: "#008891",
-      marginHorizontal: -40,
-      marginTop: 10,
-      width: 500
+      
+      position: "absolute",
+        bottom: 0,
+        right: 0,
+        width: 440,
     },
     loginText: {
       fontWeight: "bold",
