@@ -18,13 +18,43 @@ export default function PageViewer({route}) {
     console.log(page)
     const [background, setBackground] = React.useState('')
     const [images, setImages] = React.useState(page.images)
-    const [imageUri, setImageUri] = React.useState('')
-
+    const [imageUri1, setImageUri1] = React.useState('')
+    const [imageUri2, setImageUri2] = React.useState('')
+    const [imageUri3, setImageUri3] = React.useState('')
+    const [imageUri4, setImageUri4] = React.useState('')
 
     // Send each new image uri to save footer
-    const setUri = (uri) => {
-      setImageUri(uri)
+    const setUri1 = (uri) => {
+      var newImages = images
+      newImages[0] = uri
+      setImages(newImages)
+      console.log(images)
     }
+
+    const setUri2 = (uri) => {
+      var newImages = images
+      newImages[1] = uri
+      setImages(newImages)
+      console.log(images)
+
+    }
+
+    const setUri3 = (uri) => {
+      var newImages = images
+      newImages[2] = uri
+      setImages(newImages)
+      console.log(images)
+
+    }
+
+    const setUri4 = (uri) => {
+      var newImages = images
+      newImages[3] = uri
+      setImages(newImages)
+      console.log(images)
+
+    }
+
 
     const updateImages = (imageList) => {
       setImages(imageList)
@@ -57,18 +87,18 @@ export default function PageViewer({route}) {
           
           
           <View style={{flexDirection:"row", flex: 1}}>
-            <UploadImageButton setUri = {setUri} style={{flex: 1}}></UploadImageButton>
-            <UploadImageButton setUri = {setUri} style={{flex: 2}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri1} style={{flex: 1}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri2} style={{flex: 2}}></UploadImageButton>
           </View>
 
           <View style={{flexDirection:"row", flex: 2}}>
-            <UploadImageButton setUri = {setUri} style={{flex: 1}}></UploadImageButton>
-            <UploadImageButton setUri = {setUri} style={{flex: 2}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri3} style={{flex: 1}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri4} style={{flex: 2}}></UploadImageButton>
           </View>
           
           
           
-          <SaveFooter uri = {imageUri} updateImages={updateImages} page={page} style={{flex:1}}></SaveFooter>
+          <SaveFooter images = {images} page={page} style={{flex:1}}></SaveFooter>
 
           </ImageBackground>
           
