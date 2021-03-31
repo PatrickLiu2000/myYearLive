@@ -7,6 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Alert,
+    TextInput
   } from 'react-native';
 
 
@@ -15,6 +16,7 @@ import {
 
 export default function UploadImageButton({setUri}) {
   const [response, setResponse] = React.useState(null)
+  const [description, onChangeDescription] = React.useState("");
   React.useEffect(() => {
     if (response != null) {
       setUri(response.uri)
@@ -60,6 +62,13 @@ export default function UploadImageButton({setUri}) {
         />
       </View>
       )}
+      <TextInput
+      onChange={onChangeDescription}
+      placeholder={"Image Description"}
+      value={description}
+      placeholderTextColor="#202429" 
+      style={{textAlign:"center", fontSize: 20}}
+      />
       <TouchableOpacity
         onPress={() => {
           ImagePicker.launchImageLibrary(
