@@ -30,7 +30,7 @@ export default function App() {
       <Stack.Navigator>
 
 
-            {/* <Stack.Screen
+            <Stack.Screen
             name='LoginView'
             component={LoginView}
             options={{ 
@@ -103,7 +103,7 @@ export default function App() {
             backgroundColor: '#009999',
           }, 
         }}
-        /> */}
+        />
 {/* TESTING PDF */}
 
 <Stack.Screen
@@ -116,18 +116,6 @@ export default function App() {
           }, 
         }}
         />
-
-
-        {/* <Stack.Screen
-        name='downloadPdf'
-        component={downloadPdf}
-        options={{ 
-          title: 'PDF',
-          headerStyle: {
-            backgroundColor: '#009999',
-          },
-        }}
-        />  */}
 
 
       </Stack.Navigator>
