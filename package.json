@@ -25,17 +25,13 @@
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-emoji-input": "^1.1.10",
     "react-native-gesture-handler": "^1.8.0",
-    "react-native-html-to-pdf": "^0.9.1",
     "react-native-image-picker": "^3.2.1",
-    "react-native-image-to-pdf": "^1.2.0",
-    "react-native-print": "^0.7.0",
     "react-native-progress": "^4.1.2",
     "react-native-reanimated": "^1.13.2",
     "react-native-safe-area-context": "^3.1.9",
     "react-native-screens": "^2.14.0",
     "react-native-stickers": "^0.0.2",
     "react-native-vector-icons": "^7.1.0",
-    "react-native-view-shot": "^3.1.2",
     "rxjs": "^5.5.12"
   },
   "devDependencies": {

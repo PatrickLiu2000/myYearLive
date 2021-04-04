@@ -16,10 +16,6 @@ import Emoji from './components/addEmoji/Emoji';
 
 import Stickers from './components/addStickers/Stickers'
 
-import downloadPdf from './components/downloadPDF/downloadPdf'
-
-import savePdf from './components/downloadPDF/savePdf'
-
 const Stack = createStackNavigator();
 
 
@@ -99,18 +95,6 @@ export default function App() {
         component={PageViewer}
         options={{ 
           title: 'Page Viewer',
-          headerStyle: {
-            backgroundColor: '#009999',
-          }, 
-        }}
-        />
-{/* TESTING PDF */}
-
-<Stack.Screen
-        name='downloadPdf'
-        component={savePdf}
-        options={{ 
-          title: 'PDF',
           headerStyle: {
             backgroundColor: '#009999',
           }, 
