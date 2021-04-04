@@ -14,7 +14,7 @@ import {
 
 
 
-export default function UploadImageButton({setUri}) {
+export default function UploadImageButton({setUri, setDescription}) {
   const [response, setResponse] = React.useState(null)
   const [description, onChangeDescription] = React.useState("");
   React.useEffect(() => {
@@ -23,6 +23,19 @@ export default function UploadImageButton({setUri}) {
     }
   }, [response]
   );
+  // React.useEffect(() => {
+  //   console.log("kkskdffkasdfaksdfaskdfadskadksd")
+  //   if (description != '') {
+  //     setDescription(description)
+  //   }
+  // }, [description]
+  // );
+
+  const changeDesc = (text) => {
+    onChangeDescription(text)
+    setDescription(text)
+    console.log(text)
+  }
 
   if (response == null || response.uri == null) {
     return (
@@ -63,7 +76,7 @@ export default function UploadImageButton({setUri}) {
       </View>
       )}
       <TextInput
-      onChange={onChangeDescription}
+      onChangeText={text => changeDesc(text)}
       placeholder={"Image Description"}
       value={description}
       placeholderTextColor="#202429" 

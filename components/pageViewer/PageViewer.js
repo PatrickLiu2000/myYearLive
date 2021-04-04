@@ -18,6 +18,7 @@ export default function PageViewer({route}) {
     console.log(page)
     const [background, setBackground] = React.useState('')
     const [images, setImages] = React.useState(page.images)
+    const [descs, setDescs] = React.useState([4])
     const [imageUri1, setImageUri1] = React.useState('')
     const [imageUri2, setImageUri2] = React.useState('')
     const [imageUri3, setImageUri3] = React.useState('')
@@ -30,6 +31,13 @@ export default function PageViewer({route}) {
       setImages(newImages)
       console.log(images)
     }
+    const setDesc1 = (desc) => {
+      var cur_descs = descs
+      cur_descs[0] = desc
+      setDescs(cur_descs)
+      console.log('sssssssssssssssssssssssss')
+      console.log(cur_descs)
+    }
 
     const setUri2 = (uri) => {
       var newImages = images
@@ -37,6 +45,12 @@ export default function PageViewer({route}) {
       setImages(newImages)
       console.log(images)
 
+    }
+    const setDesc2 = (desc) => {
+      var cur_descs = descs
+      cur_descs[1] = desc
+      setDescs(cur_descs)
+      console.log(cur_descs)
     }
 
     const setUri3 = (uri) => {
@@ -46,6 +60,13 @@ export default function PageViewer({route}) {
       console.log(images)
 
     }
+    const setDesc3 = (desc) => {
+      var cur_descs = descs
+      cur_descs[1] = desc
+      setDescs(cur_descs)
+      console.log(cur_descs)
+    }
+    
 
     const setUri4 = (uri) => {
       var newImages = images
@@ -53,6 +74,12 @@ export default function PageViewer({route}) {
       setImages(newImages)
       console.log(images)
 
+    }
+    const setDesc4= (desc) => {
+      var cur_descs = descs
+      cur_descs[1] = desc
+      setDescs(cur_descs)
+      console.log(cur_descs)
     }
 
 
@@ -87,18 +114,18 @@ export default function PageViewer({route}) {
           
           
           <View style={{flexDirection:"row", flex: 1}}>
-            <UploadImageButton setUri = {setUri1} style={{flex: 1}}></UploadImageButton>
-            <UploadImageButton setUri = {setUri2} style={{flex: 2}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri1} setDescription={setDesc1} style={{flex: 1}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri2} setDescription={setDesc2} style={{flex: 2}}></UploadImageButton>
           </View>
 
           <View style={{flexDirection:"row", flex: 2}}>
-            <UploadImageButton setUri = {setUri3} style={{flex: 1}}></UploadImageButton>
-            <UploadImageButton setUri = {setUri4} style={{flex: 2}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri3} setDescription={setDesc3} style={{flex: 1}}></UploadImageButton>
+            <UploadImageButton setUri = {setUri4} setDescription={setDesc4} style={{flex: 2}}></UploadImageButton>
           </View>
           
           
           
-          <SaveFooter images = {images} page={page} style={{flex:1}}></SaveFooter>
+          <SaveFooter images = {images} page={page} descriptions= {descs}style={{flex:1}}></SaveFooter>
 
           </ImageBackground>
           

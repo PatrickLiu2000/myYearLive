@@ -11,11 +11,12 @@ import {
   } from 'react-native';
 
 //   For each image uri, upload to firestore and storage  
-export default function SaveFooter({images, page}) {
+export default function SaveFooter({images, page, descriptions}) {
 
     const addImage = (userDoc, images, doc) => {
         let pagesList = doc._data.pages
         pagesList[page.id].images = images
+        pagesList[page.id].descriptions = descriptions
         pagesList[page.id].background = page.background
         userDoc.update({
             pages: pagesList
