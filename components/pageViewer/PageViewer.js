@@ -18,7 +18,19 @@ import UploadImageButton from '../selectTemplate/UploadImageButton';
 
 export default function PageViewer({route}) {
     let page = route.params
-    console.log(page)
+    React.useEffect(() => {
+      var storageRef = storage().ref('assets/')
+      storageRef.child(page.background).getDownloadURL()
+      .then((url) => {
+        setBackground(url)
+
+      })
+      .catch((error) => {
+        console.log(error)
+      });
+      getDownloadUrls()
+      
+    }, []);
     const [background, setBackground] = React.useState('')
     const [images, setImages] = React.useState(page.images)
     const [descs, setDescs] = React.useState(page.descriptions)
@@ -112,19 +124,7 @@ export default function PageViewer({route}) {
     
     
 
-    React.useEffect(() => {
-      var storageRef = storage().ref('assets/')
-      storageRef.child(page.background).getDownloadURL()
-      .then((url) => {
-        setBackground(url)
-
-      })
-      .catch((error) => {
-        console.log(error)
-      });
-      getDownloadUrls()
-      
-    }, []);
+    
 
 
 
