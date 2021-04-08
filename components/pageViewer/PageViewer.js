@@ -15,6 +15,18 @@ import SaveFooter from '../selectTemplate/SaveFooter';
 import UploadImageButton from '../selectTemplate/UploadImageButton';
 
 
+// So basically, the idea is that when the page is loaded, the useEffect hook
+// gets all the download urls of the page's images and if there is a download url for
+// the 4 image slots it will render the image. If not it will show the upload Button.
+// For some reason, if i pull up the page viewer on an already saved page, sometimes it will show
+// all the images, sometimes itll show some of them and sometimes it will show none. After the page loads,
+// if i reload it again by saving vscode, all the images will show up but in a random order.
+// Also the UI is totally busted because i'm horrible at css.
+// Also i changed it so that when you save, images have fields for url and description in firestore and also 
+// the homeview page icons should show the background of that page instead of the plus button image
+// I'd recommend deleting all the pages you have now so that its all fresh and then playing around with it.
+
+// Sorry for the shitty code, text me if you have questions.
 
 export default function PageViewer({route}) {
     let page = route.params
