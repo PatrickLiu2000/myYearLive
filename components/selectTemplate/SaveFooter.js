@@ -16,8 +16,9 @@ export default function SaveFooter({images, page, descriptions}) {
     const addImage = (userDoc, images, doc) => {
         let pagesList = doc._data.pages
         pagesList[page.id].images = images
-        pagesList[page.id].descriptions = descriptions
         pagesList[page.id].background = page.background
+        pagesList[page.id].descriptions = descriptions
+        pagesList[page.id].url = page.url
         userDoc.update({
             pages: pagesList
         })
@@ -31,12 +32,17 @@ export default function SaveFooter({images, page, descriptions}) {
         var storageRef = await storage().ref(user.uid + "/" + page.id + "/")
         var filesList = await storageRef.listAll()
         var filesInStorage = filesList["items"]
-        console.log(filesInStorage)
         
         for (var i = 0; i < images.length; i++) {
-            const filename = user.uid + '/' + page.id + "/" +Date.now() + '.jpg'
             const uploadUri = Platform.OS === 'ios' ? images[i].replace('file://', '') : images[i];
-            imageURLs.push(filename)
+            var suffix = uploadUri.split("/")
+            suffix = suffix[suffix.length - 1]
+            const filename = user.uid + '/' + page.id + "/" + suffix
+            imageURLs.push({
+                "url": suffix,
+                "description": descriptions[i]
+
+            })
             
             const task = storage()
                 .ref(filename)
@@ -52,12 +58,11 @@ export default function SaveFooter({images, page, descriptions}) {
             if (imageURLs.indexOf(filesInStorage[j]["path"]) < 0) {
                 var delRef = topRef.child(filesInStorage[j]["path"])
                 delRef.delete().then(() => {
-                    console.log("d")
+                    console.log('Deleted')
                   }).catch((error) => {
                     console.log(error)
                   });
             }
-            // console.log(filesInStorage[j]["path"])
         }
 
         
