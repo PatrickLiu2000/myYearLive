@@ -2,6 +2,7 @@ import React, {useState, useEffect } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
 import { ListItem, Icon } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native';
+import storage from '@react-native-firebase/storage';
 
 
 const full_list = [
@@ -41,6 +42,10 @@ export default function SelectTemplate({route}) {
     const goToPage = (page, item) => {
       console.log(item)
       page.background = item.title + 'Template.png'
+      storage().ref('assets/').child(page.background).getDownloadURL()
+      .then((url) => {
+        page.url = url
+      })
       navigation.navigate("PageViewer", page)
     }
 

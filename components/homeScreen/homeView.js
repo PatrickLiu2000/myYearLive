@@ -20,7 +20,10 @@ const styles = StyleSheet.create({
     height: 100,
     marginTop: 30,
     marginRight: 30,
-    marginLeft: 30
+    marginLeft: 30,
+    borderRadius: 15,
+    borderColor: "grey",
+    borderWidth: 1
   },
   view: {
     // flexDirection: 'row',
@@ -89,6 +92,7 @@ export default function HomeView() {
         url: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAMAAACahl6sAAAAY1BMVEX///8AAAAGBgatra3h4eHc3NwNDQ18fHz6+vqUlJT19fW5ubkUFBRZWVkmJiYRERGnp6dSUlJMTExFRUVqampeXl4wMDC6urqxsbFUVFQsLCzZ2dlBQUGioqJ2dnaRkZF/f39xRK95AAACgElEQVR4nO2dW1PCQAxG2V4AKS1QpHJR5P//SmEYx13EcUaSNFPPeSf5Dt1ulwfS0QgAAAAAAAAAAAAAAAAAAIbGrDq2zSILwmSLpj1WMzONaieukOjsKhONfK9pcaXL1TUOr/oaF9alrsfb2MYjhPFS0+NopXFhoufxbOkRwrOWh+n1uKB0Td6sPUJQuU8OZvf5F2ONvcto301Zy3ss+/AIYSsucvM8zzZ5MZXuMS3yzc3pp5PusU3r14V0g0+KXdpJ+ty1Sqo/CVdPeEq/Mtnis8zM48Ykkz3VbxW/pO8kq0t2bcUP9Uzt/vikiK+/7OO9jSpvRCvfpY7ataKVm6iy/o+eUR61a0QrL6LK6ivrvLaidnPRyvGiFX8Ofmca35KileNtRLSwdT9EvPVDxFs/RLz1Q8Rbv38vYv05d4EQ8RYIEW+BEPEWCBFvgRDxFggRb4EQ8RYIEW+BEPEWCBFvgRDxFqg3kfAAiCCCCCKIIIIIIoj8rbD159wFQsRbIES8BULEWyBEvAVCxFsgRLwFQsRbIES8BULEWyBEvAVCxFsgdyLu+iHirR8i3voh4q0fIt76DUZkMH/MNx6VUEbtZEcl9Di8Yi9aucdxIivRyoMZ8FLF28hOtPQdkolLsiN3TIcgvce9hIcgpXOJdE0SD/GJS8naOq8uvUFh6SSv8CLdoEvrZ7XG6LYyr7VHtyVbuyHyw/RG6z48ZGdSXSmHMnCyj0mNSqehibXHScdjOGNyja/JSc/jfJ/YjZJW/rVQGu3CrfJw7zPb7vcYj9IpPAfvUN2eI2TJavHz1Y/MqknbzOVfSTDfryaGryQAAAAAAAAAAAAAAAAAAAArPgB57yJcMN9cyQAAAABJRU5ErkJggg==',
         // add other page props here
         images: [],
+        descriptions: [],
         background: ''
       }]);
       setMadeEdits(true)
