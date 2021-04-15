@@ -8,7 +8,8 @@ import {
     StyleSheet,
     View,
     ImageBackground,
-    Image
+    Image,
+    Text
     
   } from 'react-native';
 import SaveFooter from '../selectTemplate/SaveFooter';
@@ -31,6 +32,8 @@ import UploadImageButton from '../selectTemplate/UploadImageButton';
 export default function PageViewer({route}) {
     let page = route.params
     React.useEffect(() => {
+      getDownloadUrls()
+
       var storageRef = storage().ref('assets/')
       storageRef.child(page.background).getDownloadURL()
       .then((url) => {
@@ -40,7 +43,6 @@ export default function PageViewer({route}) {
       .catch((error) => {
         console.log(error)
       });
-      getDownloadUrls()
       
     }, []);
     const [background, setBackground] = React.useState('')
@@ -51,6 +53,8 @@ export default function PageViewer({route}) {
     const [imageUri2, setImageUri2] = React.useState('')
     const [imageUri3, setImageUri3] = React.useState('')
     const [imageUri4, setImageUri4] = React.useState('')
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
 
     // Send each new image uri to save footer
     const setUri1 = (uri) => {
@@ -103,16 +107,16 @@ export default function PageViewer({route}) {
       setDescs(cur_descs)
     }
 
-    const getDownloadUrls = () => {
+    const getDownloadUrls = async () => {
       const user = auth().currentUser
       var newDownloadUrls = []
 
 
-      var picRef = storage().ref(user.uid + "/" + page.id + "/")
+      var picRef = await storage().ref(user.uid + "/" + page.id + "/")
       for (var i = 0; i < images.length; i++) {
         console.log(images[i].url)
         
-        picRef.child(images[i].url).getDownloadURL()
+        await picRef.child(images[i].url).getDownloadURL()
         .then((url) => {
           newDownloadUrls.push(url)
           
@@ -123,6 +127,8 @@ export default function PageViewer({route}) {
           console.log(error)
         });
       }
+
+      forceUpdate()
       
       
     }
@@ -146,18 +152,30 @@ export default function PageViewer({route}) {
           
           
           <View style={{flexDirection:"row", flex: 1}}>
-            {downloadUrls[0] == null ? <UploadImageButton setUri = {setUri1} setDescription={setDesc1} style={{flex: 1}}></UploadImageButton>: 
-            <Image source = {{uri: downloadUrls[0]}} style = {styles.picture1}></Image>}
+            {downloadUrls[0] == null ? <UploadImageButton setUri = {setUri1} setDescription={setDesc1} style={{flex: 1}}></UploadImageButton>:
+            <View>
+                <Image source = {{uri: downloadUrls[0]}} style = {styles.picture1}></Image>
+              <Text style = {styles.description}> {descs[0]} </Text>
+            </View>}
 
             {downloadUrls[1] == null ? <UploadImageButton setUri = {setUri2} setDescription={setDesc2} style={{flex: 2}}></UploadImageButton>: 
-            <Image source = {{uri: downloadUrls[1]}} style = {styles.picture2}></Image>}
+            <View>
+              <Image source = {{uri: downloadUrls[1]}} style = {styles.picture2}></Image>
+              <Text style = {styles.description}> {descs[1]} </Text>
+            </View>}
           </View>
 
           <View style={{flexDirection:"row", flex: 2}}>
             {downloadUrls[2] == null ? <UploadImageButton setUri = {setUri3} setDescription={setDesc3} style={{flex: 1}}></UploadImageButton>: 
-            <Image source = {{uri: downloadUrls[2]}} style = {styles.picture1}></Image>}
+            <View>
+              <Image source = {{uri: downloadUrls[2]}} style = {styles.picture1}></Image>
+              <Text style ={styles.description}> {descs[2]} </Text>
+            </View>}
             {downloadUrls[3] == null ? <UploadImageButton setUri = {setUri4} setDescription={setDesc4} style={{flex: 2}}></UploadImageButton>: 
-            <Image source = {{uri: downloadUrls[3]}} style = {styles.picture2}></Image>}
+            <View>
+              <Image source = {{uri: downloadUrls[3]}} style = {styles.picture2}></Image>
+              <Text style = {styles.description}> {descs[3]} </Text>
+            </View>}
           </View>
 
           
@@ -204,9 +222,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 150,
     width: 150
-  }
+  },
 
-  
+  description: {
+    fontSize: 30
+  }
 
   
      
