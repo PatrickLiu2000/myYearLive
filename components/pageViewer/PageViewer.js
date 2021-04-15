@@ -63,8 +63,6 @@ export default function PageViewer({route}) {
       var cur_descs = descs
       cur_descs[0] = desc
       setDescs(cur_descs)
-      // console.log('sssssssssssssssssssssssss')
-      // console.log(cur_descs)
     }
 
     const setUri2 = (uri) => {
@@ -78,7 +76,6 @@ export default function PageViewer({route}) {
       var cur_descs = descs
       cur_descs[1] = desc
       setDescs(cur_descs)
-      // console.log(cur_descs)
     }
 
     const setUri3 = (uri) => {
@@ -92,7 +89,6 @@ export default function PageViewer({route}) {
       var cur_descs = descs
       cur_descs[2] = desc
       setDescs(cur_descs)
-      // console.log(cur_descs)
     }
     
 
@@ -100,14 +96,11 @@ export default function PageViewer({route}) {
       var newImages = images
       newImages[3] = uri
       setImages(newImages)
-      // console.log(images)
-
     }
     const setDesc4= (desc) => {
       var cur_descs = descs
       cur_descs[3] = desc
       setDescs(cur_descs)
-      // console.log(cur_descs)
     }
 
     const getDownloadUrls = () => {
@@ -117,18 +110,19 @@ export default function PageViewer({route}) {
 
       var picRef = storage().ref(user.uid + "/" + page.id + "/")
       for (var i = 0; i < images.length; i++) {
+        console.log(images[i].url)
         
         picRef.child(images[i].url).getDownloadURL()
         .then((url) => {
           newDownloadUrls.push(url)
           
-  
+        }).then(() => {
+          setDownloadUrls(newDownloadUrls)
         })
         .catch((error) => {
-          console.log("e")
+          console.log(error)
         });
       }
-      setDownloadUrls(newDownloadUrls)
       
       
     }
@@ -200,14 +194,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: 'center',
     justifyContent: 'center',
-    height: 50
+    height: 150,
+    width: 150
   },
 
   picture2: {
     flex: 2,
     alignSelf: 'center',
     justifyContent: 'center',
-    height: 50
+    height: 150,
+    width: 150
   }
 
   

@@ -23,18 +23,12 @@ export default function UploadImageButton({setUri, setDescription}) {
     }
   }, [response]
   );
-  // React.useEffect(() => {
-  //   console.log("kkskdffkasdfaksdfaskdfadskadksd")
-  //   if (description != '') {
-  //     setDescription(description)
-  //   }
-  // }, [description]
-  // );
-
+  React.useEffect(() => {
+    console.log("hello?")
+  },[])
   const changeDesc = (text) => {
     onChangeDescription(text)
     setDescription(text)
-    console.log(text)
   }
 
   if (response == null || response.uri == null) {
@@ -51,13 +45,11 @@ export default function UploadImageButton({setUri, setDescription}) {
                 },
                 (response) => {
                   setResponse(response);
-                  
+                  if (!response.didCancel){ 
+                    setUri(response.uri)
+                  }
                 },
               )
-              if (response) {
-                console.log('here')
-                setUri(response.uri)
-              }
             }
             }>
               <Text style={styles.button}>+</Text>
@@ -92,7 +84,7 @@ export default function UploadImageButton({setUri, setDescription}) {
               maxWidth: 200,
             },
             (response) => {
-              setResponse(response);
+              setResponse(response)
             },
           )
         }

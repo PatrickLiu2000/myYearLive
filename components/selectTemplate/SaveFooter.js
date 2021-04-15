@@ -34,6 +34,7 @@ export default function SaveFooter({images, page, descriptions}) {
         var filesInStorage = filesList["items"]
         
         for (var i = 0; i < images.length; i++) {
+            if (typeof(images[i]) === 'undefined') continue;
             const uploadUri = Platform.OS === 'ios' ? images[i].replace('file://', '') : images[i];
             var suffix = uploadUri.split("/")
             suffix = suffix[suffix.length - 1]
