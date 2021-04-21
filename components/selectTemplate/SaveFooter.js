@@ -7,7 +7,6 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    Alert,
   } from 'react-native';
 
 //   For each image uri, upload to firestore and storage  
@@ -16,7 +15,11 @@ export default function SaveFooter({images, page, descriptions}) {
     const addImage = (userDoc, images, doc) => {
         let pagesList = doc._data.pages
         pagesList[page.id].images = images
+        console.log(images)
         pagesList[page.id].background = page.background
+        for (var i = 0; i < images.length; i++) {
+            descriptions[i] = images[i].description
+        }
         pagesList[page.id].descriptions = descriptions
         pagesList[page.id].url = page.url
         userDoc.update({
@@ -34,37 +37,53 @@ export default function SaveFooter({images, page, descriptions}) {
         var filesInStorage = filesList["items"]
         
         for (var i = 0; i < images.length; i++) {
+            var suffix;
             if (typeof(images[i]) === 'undefined') continue;
-            const uploadUri = Platform.OS === 'ios' ? images[i].replace('file://', '') : images[i];
-            var suffix = uploadUri.split("/")
-            suffix = suffix[suffix.length - 1]
-            const filename = user.uid + '/' + page.id + "/" + suffix
+            if (!images[i].url) {
+                const uploadUri = Platform.OS === 'ios' ? images[i].replace('file://', '') : images[i];
+                suffix = uploadUri.split("/")
+                suffix = suffix[suffix.length - 1]
+                const filename = user.uid + '/' + suffix
+                
+                
+                const task = storage()
+                    .ref(filename)
+                    .putFile(uploadUri);
+                try {
+                    await task;
+                } catch (e) {
+                    console.error(e);
+                }
+            } else {
+                suffix = images[i].url
+            }
             imageURLs.push({
                 "url": suffix,
                 "description": descriptions[i]
 
             })
             
-            const task = storage()
-                .ref(filename)
-                .putFile(uploadUri);
             
-            try {
-                await task;
-            } catch (e) {
-                console.error(e);
-            }
         }
-        for (var j = 0; j < filesInStorage.length; j++) {
-            if (imageURLs.indexOf(filesInStorage[j]["path"]) < 0) {
-                var delRef = topRef.child(filesInStorage[j]["path"])
-                delRef.delete().then(() => {
-                    console.log('Deleted')
-                  }).catch((error) => {
-                    console.log(error)
-                  });
-            }
-        }
+        
+        // for (var j = 0; j < filesInStorage.length; j++) {
+        //     var file = filesInStorage[j].path.split('/')
+        //     file = file[2]
+        //     var shouldDelete = true
+        //     for (var k = 0; k < imageURLs.length; k++) {
+        //         if (file == imageURLs[k].url) {
+        //             shouldDelete = false
+        //         }
+        //     }
+        //     if (shouldDelete) {
+        //         var delRef = topRef.child(filesInStorage[j]["path"])
+        //         delRef.delete().then(() => {
+        //             console.log('Deleted')
+        //           }).catch((error) => {
+        //             console.log(error)
+        //           });
+        //     }
+        // }
 
         
         var userDoc = await firestore().collection('users').doc(user.uid)

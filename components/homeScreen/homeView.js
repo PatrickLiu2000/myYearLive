@@ -102,7 +102,7 @@ export default function HomeView() {
   const deletePage = index => {
     const newTimes = [...userPages];
     newTimes.splice(index, 1);
-    for (var i = 0; i < newTimes.length; i++) {
+    for (var i = index; i < newTimes.length; i++) {
       newTimes[i].id = i + 1;
     }
     setuserPages(newTimes);
@@ -152,7 +152,7 @@ export default function HomeView() {
                   source={{uri: item.url}}
                   style={styles.template}
                 />
-                <Text style={styles.label}> Page {item.id + 1} </Text>
+                <Text style={styles.label}> Page {index + 1} </Text>
               </TouchableOpacity>
             <TouchableOpacity onPress= {() => deletePage(index)} style={styles.delete_button}>
               <Text style = {styles.delete_button_text}>Delete</Text>
