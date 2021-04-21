@@ -112,7 +112,7 @@ export default function PageViewer({route}) {
       var newDownloadUrls = []
 
 
-      var picRef = await storage().ref(user.uid + "/" + page.id + "/")
+      var picRef = await storage().ref(user.uid + "/")
       for (var i = 0; i < images.length; i++) {
         console.log(images[i].url)
         
