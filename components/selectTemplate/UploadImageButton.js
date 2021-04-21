@@ -23,9 +23,6 @@ export default function UploadImageButton({setUri, setDescription}) {
     }
   }, [response]
   );
-  React.useEffect(() => {
-    console.log("hello?")
-  },[])
   const changeDesc = (text) => {
     onChangeDescription(text)
     setDescription(text)
