@@ -181,7 +181,7 @@ export default function PageViewer({route}) {
           
           
           
-          <SaveFooter images = {images} page={page} descriptions= {descs}style={{flex:1}}></SaveFooter>
+          <SaveFooter images = {images} page={page} descriptions= {descs}style={{flex:1, }}></SaveFooter>
 
           </ImageBackground> 
           {/* <ActivityIndicator style = {{flex: 1, justifyContent: 'center', alignContent: 'center'}}></ActivityIndicator>} */}
