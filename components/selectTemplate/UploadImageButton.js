@@ -7,7 +7,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Alert,
-    TextInput
+    TextInput,
   } from 'react-native';
 
 
@@ -59,8 +59,8 @@ export default function UploadImageButton({setUri, setDescription}) {
       {response && (
       <View style={styles.image}>
         <Image
-          style={{width: 150, height: 150, borderColor:'black', borderWidth:5}}
-          source={{uri: response.uri}}
+           style={{resizeMode: 'contain', width: 200, height: 200}}
+           source={{uri: response.uri}}
         />
       </View>
       )}
@@ -69,7 +69,7 @@ export default function UploadImageButton({setUri, setDescription}) {
       placeholder={"Image Description"}
       value={description}
       placeholderTextColor="#202429" 
-      style={{textAlign:"center", fontSize: 20}}
+      style={{textAlign:"center", fontSize: 20, fontWeight: 'bold'}}
       />
       <TouchableOpacity
         onPress={() => {
@@ -124,11 +124,12 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       color:'#5b5b5b',
     },
+
     image: {
-      marginVertical: 24,
       alignItems: 'center',
       borderRadius: 400/2
     },
+
     footer: {
       borderRadius: 10,
       height: 80,

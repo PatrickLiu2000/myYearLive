@@ -9,7 +9,8 @@ import {
     View,
     ImageBackground,
     Image,
-    Text
+    Text,
+    ActivityIndicator
     
   } from 'react-native';
 import SaveFooter from '../selectTemplate/SaveFooter';
@@ -27,10 +28,10 @@ import UploadImageButton from '../selectTemplate/UploadImageButton';
 // the homeview page icons should show the background of that page instead of the plus button image
 // I'd recommend deleting all the pages you have now so that its all fresh and then playing around with it.
 
-// Sorry for the shitty code, text me if you have questions.
 
 export default function PageViewer({route}) {
     let page = route.params
+    console.log(page)
     React.useEffect(() => {
       getDownloadUrls()
 
@@ -49,10 +50,7 @@ export default function PageViewer({route}) {
     const [images, setImages] = React.useState(page.images)
     const [descs, setDescs] = React.useState(page.descriptions)
     const [downloadUrls, setDownloadUrls] = React.useState([])
-    const [imageUri1, setImageUri1] = React.useState('')
-    const [imageUri2, setImageUri2] = React.useState('')
-    const [imageUri3, setImageUri3] = React.useState('')
-    const [imageUri4, setImageUri4] = React.useState('')
+    const [loaded, setLoaded] = React.useState(false)
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
 
@@ -129,6 +127,7 @@ export default function PageViewer({route}) {
       }
 
       forceUpdate()
+      setLoaded(true)
       
       
     }
@@ -145,7 +144,7 @@ export default function PageViewer({route}) {
     return (
         <View style={styles.container}>
           
-          
+          {/* {loaded ? */}
           <ImageBackground 
             source={{uri: background}}
             style={styles.image}>
@@ -153,26 +152,26 @@ export default function PageViewer({route}) {
           
           <View style={{flexDirection:"row", flex: 1}}>
             {downloadUrls[0] == null ? <UploadImageButton setUri = {setUri1} setDescription={setDesc1} style={{flex: 1}}></UploadImageButton>:
-            <View>
+            <View style = {{padding: 3, paddingTop: 40, alignItems: 'center'}}>
                 <Image source = {{uri: downloadUrls[0]}} style = {styles.picture1}></Image>
               <Text style = {styles.description}> {descs[0]} </Text>
             </View>}
 
-            {downloadUrls[1] == null ? <UploadImageButton setUri = {setUri2} setDescription={setDesc2} style={{flex: 2}}></UploadImageButton>: 
-            <View>
+            {downloadUrls[1] == null ? <UploadImageButton setUri = {setUri2} setDescription={setDesc2} style={{flex: 1}}></UploadImageButton>: 
+            <View style = {{padding: 3, paddingTop: 40, alignItems: 'center'}}>
               <Image source = {{uri: downloadUrls[1]}} style = {styles.picture2}></Image>
               <Text style = {styles.description}> {descs[1]} </Text>
             </View>}
           </View>
 
-          <View style={{flexDirection:"row", flex: 2}}>
+          <View style={{flexDirection:"row", flex: 1}}>
             {downloadUrls[2] == null ? <UploadImageButton setUri = {setUri3} setDescription={setDesc3} style={{flex: 1}}></UploadImageButton>: 
-            <View>
+            <View style = {{padding: 3, paddingTop: 40, alignItems: 'center'}}>
               <Image source = {{uri: downloadUrls[2]}} style = {styles.picture1}></Image>
               <Text style ={styles.description}> {descs[2]} </Text>
-            </View>}
-            {downloadUrls[3] == null ? <UploadImageButton setUri = {setUri4} setDescription={setDesc4} style={{flex: 2}}></UploadImageButton>: 
-            <View>
+            </View >}
+            {downloadUrls[3] == null ? <UploadImageButton setUri = {setUri4} setDescription={setDesc4} style={{flex: 1}}></UploadImageButton>: 
+            <View style = {{padding: 3, paddingTop: 40, alignItems: 'center'}}>
               <Image source = {{uri: downloadUrls[3]}} style = {styles.picture2}></Image>
               <Text style = {styles.description}> {descs[3]} </Text>
             </View>}
@@ -182,9 +181,10 @@ export default function PageViewer({route}) {
           
           
           
-          <SaveFooter images = {images} page={page} descriptions= {descs}style={{flex:1}}></SaveFooter>
+          <SaveFooter images = {images} page={page} descriptions= {descs}style={{flex:1, }}></SaveFooter>
 
-          </ImageBackground>
+          </ImageBackground> 
+          {/* <ActivityIndicator style = {{flex: 1, justifyContent: 'center', alignContent: 'center'}}></ActivityIndicator>} */}
           
 
         </View>
@@ -198,6 +198,9 @@ const styles = StyleSheet.create({
   container: {
       flex: 1,
       flexDirection:'column',
+      justifyContent: 'center',
+
+
       
   },
 
@@ -209,23 +212,21 @@ const styles = StyleSheet.create({
   },
 
   picture1: {
-    flex: 1,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    height: 150,
-    width: 150
+    height: 200,
+    resizeMode: 'contain',
+    width: 200,
   },
 
   picture2: {
-    flex: 2,
-    alignSelf: 'center',
-    justifyContent: 'center',
-    height: 150,
-    width: 150
+    height: 200,
+    resizeMode: 'contain',
+    width: 200,
   },
 
   description: {
-    fontSize: 30
+    fontSize: 20,
+    fontWeight: 'bold',
+    alignContent: 'space-around',
   }
 
   

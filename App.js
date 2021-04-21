@@ -33,8 +33,10 @@ export default function App() {
             options={{ 
               title: 'Login',
               headerStyle: {
-                backgroundColor: '#009999',
-              }, }}
+                backgroundColor: '#ca0101',
+              },
+              headerTintColor: 'white'
+            }}
           />
           <Stack.Screen
             name='homeView'
@@ -42,8 +44,10 @@ export default function App() {
             options={{ 
               title: 'Home',
               headerStyle: {
-                backgroundColor: '#009999',
-              }, }}
+                backgroundColor: '#ca0101',
+              },
+              headerTintColor: 'white'
+            }}
           />
          <Stack.Screen
           name='RegisterScreen'
@@ -51,8 +55,9 @@ export default function App() {
             options={{ 
               title: 'Register',
               headerStyle: {
-                backgroundColor: '#009999',
+                backgroundColor: '#ca0101',
               }, 
+              headerTintColor: 'white'
             }}
         />
         <Stack.Screen
@@ -61,8 +66,9 @@ export default function App() {
             options={{ 
               title: 'Select Template',
               headerStyle: {
-                backgroundColor: '#009999',
+                backgroundColor: '#ca0101',
               }, 
+              headerTintColor: 'white'
             }}
         /> 
 
@@ -97,8 +103,9 @@ export default function App() {
         options={{ 
           title: 'Page Viewer',
           headerStyle: {
-            backgroundColor: '#009999',
+            backgroundColor: '#ca0101',
           }, 
+          headerTintColor: 'white'
         }}
         />
 
