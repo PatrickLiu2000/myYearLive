@@ -227,6 +227,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     alignContent: 'space-around',
+    maxWidth: 180
   }
 
   
