@@ -12,6 +12,7 @@ import {
     TouchableOpacity, 
     CheckBox,
     Switch,
+    Image,
     Alert} from 'react-native';
     
 async function onEmailSignInButton(email, password) {
@@ -168,6 +169,12 @@ export default function LoginView() {
 
     return (
         <View style={containerStyle.container}>
+            <Image 
+                source = {require('./MYLlogo4.jpg')}
+                style = {{height: 200,
+                         resizeMode: 'contain',
+                         width: 200,}}>
+            </Image>
           <Text style={[styles.remember, {marginLeft: 0}]}>Welcome {user.email}!</Text>
           <TouchableOpacity
                 title="Sign Out"
@@ -190,7 +197,7 @@ export default function LoginView() {
 const containerStyle = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#bbdfc8',
+      backgroundColor: 'white',
       alignItems: 'center',
       justifyContent: 'center'
     },
@@ -212,7 +219,7 @@ const containerStyle = StyleSheet.create({
       },
 
       text_footer: {
-          color: "#008891",
+          color: "#ca0101",
           fontWeight: "bold",
           fontSize: 18,
       },
@@ -227,7 +234,7 @@ const containerStyle = StyleSheet.create({
       remember:{
           padding: 5,
           fontWeight: "bold",
-          color: "#008891",
+          color: "#ca0101",
           marginLeft: 20
       },
 
@@ -237,7 +244,7 @@ const containerStyle = StyleSheet.create({
           alignItems: "center",
           marginBottom: 10,
           justifyContent: "center",
-          backgroundColor: "#008891",
+          backgroundColor: "#ca0101",
           marginHorizontal: 70,
           marginTop: 10,
           width: 200

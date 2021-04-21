@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
       height: 70,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: "#008891",
+      backgroundColor: "#ca0101",
       
       position: "absolute",
         bottom: 0,
@@ -124,6 +124,7 @@ const styles = StyleSheet.create({
         width: 440,
     },
     loginText: {
+      textAlign: 'center',
       fontWeight: "bold",
       fontSize: 18,
       color: "#fff",

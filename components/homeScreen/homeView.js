@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     fontSize: 15,
     textAlign: 'center',
-    color: '#008891'
+    color: '#ca0101'
   },
   new_page_button: {
     borderRadius: 10,
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 10,
     justifyContent: "center",
-    backgroundColor: "#008891",
+    backgroundColor: "#ca0101",
     marginHorizontal: 108,
     marginTop: 10,
     width: 200
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   delete_button: {
-    backgroundColor: '#b20000',
+    backgroundColor: 'black',
     borderRadius: 10,
     marginTop: 10,
     width: 100,
@@ -103,7 +103,7 @@ export default function HomeView() {
     const newTimes = [...userPages];
     newTimes.splice(index, 1);
     for (var i = index; i < newTimes.length; i++) {
-      newTimes[i].id = i + 1;
+      newTimes[i].id = i;
     }
     setuserPages(newTimes);
     setMadeEdits(true)
